@@ -1,52 +1,76 @@
-# hmy_managerial_system
+# 一、Vue3+TS项目架构-代码规范-集成第三库
 
-This template should help get you started developing with Vue 3 in Vite.
+## (一) 项目的介绍
 
-## Recommended IDE Setup
+### 1. 后台管理系统的定位和核心
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+后台管理系统的定位在于提供一个功能强大的工具，用于管理数据、用户、权限等关键后端功能。其核心职责包括数据管理、权限控制和数据可视化。
 
-## Type Support for `.vue` Imports in TS
+### 2. 后台管理系统项目功能介绍
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+用户管理、数据展示、权限控制、数据导出等，旨在为用户提供全面的后台管理功能。
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### 3. 创建项目-npm init vue@latest
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+项目创建阶段，采用npm命令来初始化项目，使用了最新版本的Vue。
 
-## Customize configuration
+### 4. 目录结构
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### 5. 1.5. tsconfig文件的作用和解析
 
-## Project Setup
+## (二) 项目代码规范
 
-```sh
-npm install
-```
+### 1.  editorconfig文件
 
-### Compile and Hot-Reload for Development
+editorconfig文件，定义项目中代码编辑器的配置，如缩进和换行符。
 
-```sh
-npm run dev
-```
+### 2. prettier配置
 
-### Type-Check, Compile and Minify for Production
+Prettier的配置。自动调整代码风格，以确保一致性。
 
-```sh
-npm run build
-```
+### 3. eslint配置
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+检测和修复潜在的代码问题
 
-```sh
-npm run test:unit
-```
+## (三) 项目内容搭建
 
-### Lint with [ESLint](https://eslint.org/)
+### 1.  目录结构的创建
 
-```sh
-npm run lint
-```
+- node_modules
+- public
+- src
+
+- - assets
+  - base-ui
+  - components
+  - router
+  - service
+  - store
+  - utils
+  - views
+
+- - - App.vue
+
+- - main.ts
+
+- .env
+- .env.development
+- .env.production
+- .eslintrc.cjs
+- .gitignore
+- .prettierrc.json
+- auto-imports.d.ts
+- components.d.ts
+
+### 2. css样式的重置
+
+### 3. vue-router路由
+
+### 4. pinia状态管理
+
+### 5. axios网络请求
+
+### 6. 区分开发和生产环境
+
+
+ 
