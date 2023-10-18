@@ -3,6 +3,7 @@
   "exclude": [],
   "compilerOptions": {
     "composite": true,
+    "noImplicitAny": false,
     "lib": [],
     "types": [
       "node",
