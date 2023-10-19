@@ -1,15 +1,21 @@
 <script setup lang='ts'>
-
+import loginPanel from './c-cpns/login-panel.vue';
 </script>
 
 <template>
   <div class="login">
-    <h2>login</h2>
+    <loginPanel />
   </div>
 </template>
 
 <style lang='less' scoped>
 .login {
-  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  background: url("../../assets//img//bgc.svg") center/cover;
 }
 </style>
