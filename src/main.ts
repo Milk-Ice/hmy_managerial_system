@@ -3,8 +3,10 @@ import "./assets/css/index.less"
 import { createApp } from 'vue'
 import App from './App.vue'
 
-
 import router from './router'
 import pina from "./store"
+import registerIcon from "./components/gobal/register-cions"
 
-createApp(App).use(router).use(pina).mount('#app')
+createApp(App).use(registerIcon).use(router).use(pina).mount('#app')
+
+
