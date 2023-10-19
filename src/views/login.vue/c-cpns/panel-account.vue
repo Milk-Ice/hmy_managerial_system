@@ -1,33 +1,45 @@
 <script setup lang='ts'>
-import type { FormRules } from 'element-plus';
-import { reactive } from 'vue';
+import type { FormRules, ElForm } from 'element-plus';
+import { reactive, ref } from 'vue';
+import useLoginStore from '@/store/login/login'
 const account = reactive({
   name: '',
   password: ''
 })
-
+const formRef = ref<InstanceType<typeof ElForm>>()
 // 表单校验
-const rule: FormRules = {
+const accountRules: FormRules = {
   name: [
-    { required: true, message: '必须输入账号信息', trigger: 'blur ' },
+    { required: true, message: '必须输入帐号信息~', trigger: 'blur' },
     {
       pattern: /^[a-z0-9]{6,20}$/,
-      message: '必须是6-20位数字或字母组成',
+      message: '必须是6~20数字或字母组成~',
       trigger: 'blur'
-    }],
-  password: [{
-    required: true, message: '必须输入密码', trigger: 'blur'
-  },
-  {
-    pattern: /^[a-z0-9]{3,}$/,
-    message: '必须是3位以上数字或字幕组成',
-    trigger: 'blur'
-  }
+    }
+  ],
+  password: [
+    { required: true, message: '必须输入密码信息~', trigger: 'blur' },
+    {
+      pattern: /^[a-z0-9]{3,}$/,
+      message: '必须是3位以上数字或字母组成',
+      trigger: 'blur'
+    }
   ]
 }
 // 账号登陆的回调
+const loginStore = useLoginStore()
 function loginAction() {
-  console.log('panel-login action ', account.name, account.password)
+  formRef.value?.validate((valid) => {
+    if (valid) {
+      // 获取用户输入的账号和密码
+      const name = account.name
+      const password = account.password
+      // 向服务器发送请求
+      loginStore.loginAccountAction({ name, password })
+    } else {
+      ElMessage.error("请输入正确的格式后再操作")
+    }
+  })
 }
 defineExpose({
   loginAction
@@ -36,12 +48,10 @@ defineExpose({
 
 <template>
   <div class="panel-account">
-    <el-form :model="account" label-width="60px" :rules="rule" status-icon>
+    <el-form :model="account" label-width="60px" :rules="accountRules" ref="formRef" status-icon>
       <el-form-item label="账号" prop="name">
         <el-input v-model="account.name" />
       </el-form-item>
-    </el-form>
-    <el-form label-width="60px">
       <el-form-item label="密码" prop="password">
         <el-input v-model="account.password" show-password />
       </el-form-item>
