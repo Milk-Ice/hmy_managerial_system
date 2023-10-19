@@ -4,6 +4,14 @@ import panelAccount from './panel-account.vue';
 import panelPhone from './panel-phone.vue';
 const isRemPwd = ref(false)
 const activeName = ref('account')
+const accountRef = ref<InstanceType<typeof panelAccount>>()
+function handleLoginBtnClick() {
+  if (activeName.value === 'account') {
+    accountRef.value?.loginAction()
+  } else {
+    console.log('用户在手机登录')
+  }
+}
 </script>
 
 <template>
@@ -20,7 +28,8 @@ const activeName = ref('account')
               <span class="text">账号登陆</span>
             </div>
           </template>
-          <panelAccount />
+          <!-- 账号登陆面板 -->
+          <panelAccount ref="accountRef" />
         </el-tab-pane>
         <el-tab-pane label="手机登录" name="phone">
           <template #label>
@@ -31,6 +40,7 @@ const activeName = ref('account')
               <span class="title">手机登录</span>
             </div>
           </template>
+          <!-- 手机登陆面板 -->
           <panelPhone />
         </el-tab-pane>
       </el-tabs>
@@ -39,7 +49,7 @@ const activeName = ref('account')
       <el-checkbox v-model="isRemPwd" label="记住密码" />
       <el-link type="primary">忘记密码</el-link>
     </div>
-    <el-button class="login-btn" type="primary">立即登录</el-button>
+    <el-button class="login-btn" type="primary" @click="handleLoginBtnClick">立即登录</el-button>
   </div>
 </template>
 

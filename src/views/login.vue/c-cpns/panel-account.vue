@@ -5,13 +5,15 @@ const account = reactive({
   name: '',
   password: ''
 })
+
+// 表单校验
 const rule: FormRules = {
   name: [
     { required: true, message: '必须输入账号信息', trigger: 'blur ' },
     {
       pattern: /^[a-z0-9]{6,20}$/,
       message: '必须是6-20位数字或字母组成',
-      trigger: 'change'
+      trigger: 'blur'
     }],
   password: [{
     required: true, message: '必须输入密码', trigger: 'blur'
@@ -19,10 +21,17 @@ const rule: FormRules = {
   {
     pattern: /^[a-z0-9]{3,}$/,
     message: '必须是3位以上数字或字幕组成',
-    trigger: 'change'
+    trigger: 'blur'
   }
   ]
 }
+// 账号登陆的回调
+function loginAction() {
+  console.log('panel-login action ', account.name, account.password)
+}
+defineExpose({
+  loginAction
+})
 </script>
 
 <template>
