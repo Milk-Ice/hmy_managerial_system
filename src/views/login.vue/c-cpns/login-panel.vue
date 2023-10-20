@@ -2,12 +2,22 @@
 import { ref } from 'vue';
 import panelAccount from './panel-account.vue';
 import panelPhone from './panel-phone.vue';
-const isRemPwd = ref(false)
+import { localCache } from '@/utils/cache';
+import { watch } from 'vue';
+
+
+const isRemPwd = ref<boolean>(localCache.getCache('isRemPwd') ?? false)
 const activeName = ref('account')
 const accountRef = ref<InstanceType<typeof panelAccount>>()
+
+// 如果点击了记住密码，就保存在本地
+watch(isRemPwd, (newValue) => {
+  localCache.setCache('isRemPwd', newValue)
+})
+
 function handleLoginBtnClick() {
   if (activeName.value === 'account') {
-    accountRef.value?.loginAction()
+    accountRef.value?.loginAction(isRemPwd.value)
   } else {
     console.log('用户在手机登录')
   }
@@ -45,10 +55,12 @@ function handleLoginBtnClick() {
         </el-tab-pane>
       </el-tabs>
     </div>
+    <!-- 记住密码 -->
     <div class="controls">
       <el-checkbox v-model="isRemPwd" label="记住密码" />
       <el-link type="primary">忘记密码</el-link>
     </div>
+    <!-- 立即登录 -->
     <el-button class="login-btn" type="primary" @click="handleLoginBtnClick">立即登录</el-button>
   </div>
 </template>

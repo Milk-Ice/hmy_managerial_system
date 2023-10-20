@@ -3,10 +3,17 @@ import type { FormRules, ElForm } from 'element-plus';
 import { reactive, ref } from 'vue';
 import useLoginStore from '@/store/login/login'
 import type { IAccount } from "@/types/login"
+import { localCache } from '@/utils/cache';
+
+const CACHE_NAME = 'name'
+const CACHE_PASSWORD = 'password'
+
+// 1.定义account数据
 const account = reactive<IAccount>({
-  name: '',
-  password: ''
+  name: localCache.getCache(CACHE_NAME) ?? '',
+  password: localCache.getCache(CACHE_PASSWORD) ?? ''
 })
+
 const formRef = ref<InstanceType<typeof ElForm>>()
 // 表单校验
 const accountRules: FormRules = {
@@ -29,14 +36,22 @@ const accountRules: FormRules = {
 }
 // 账号登陆的回调
 const loginStore = useLoginStore()
-function loginAction() {
+function loginAction(isRemPwd: boolean) {
   formRef.value?.validate((valid) => {
     if (valid) {
       // 获取用户输入的账号和密码
       const name = account.name
       const password = account.password
       // 向服务器发送请求
-      loginStore.loginAccountAction({ name, password })
+      loginStore.loginAccountAction({ name, password }).then(() => {
+        if (isRemPwd) {
+          localCache.setCache(CACHE_NAME, name)
+          localCache.setCache(CACHE_PASSWORD, password)
+        } else {
+          localCache.removeCache(CACHE_NAME)
+          localCache.removeCache(CACHE_PASSWORD)
+        }
+      })
     } else {
       ElMessage.error("请输入正确的格式后再操作")
     }

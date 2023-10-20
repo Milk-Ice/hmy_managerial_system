@@ -1,3 +1,5 @@
+import { LOGIN_TOKEN } from "@/components/gobal/constants";
+import { localCache } from "@/utils/cache";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const router = createRouter({
@@ -21,5 +23,12 @@ const router = createRouter({
     }
   ]
 
+})
+// 路由守卫
+router.beforeEach((to) => {
+  const token = localCache.getCache(LOGIN_TOKEN)
+  if (to.path === '/main' && !token) {
+    return '/login'
+  }
 })
 export default router
