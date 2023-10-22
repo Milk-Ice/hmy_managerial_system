@@ -4,18 +4,22 @@ import useLoginStore from "@/store/login/login";
 
 const loginStore = useLoginStore()
 const userMenu = loginStore.userMenus
-
-// console.log(userMenu)
+defineProps({
+  isFold: {
+    Boolean,
+    default: false
+  }
+})
 </script>
 
 <template>
   <div class="mian-menu">
     <div class="logo">
       <img class="img" src="../../assets/img/logo.png" alt="">
-      <h2 class="title">管理系统</h2>
+      <h2 class="title" v-show="!isFold">管理系统</h2>
     </div>
     <div class="menu">
-      <el-menu text-color="#b7bdc3" active-text-color="#fff" background-color="#0a60bd">
+      <el-menu text-color="#b7bdc3" active-text-color="#fff" background-color="#0a60bd" :collapse="isFold">
         <!-- 遍历整个菜单 -->
         <template v-for="item in userMenu" :key="item.id">
           <el-sub-menu :index="item.id + ''">
