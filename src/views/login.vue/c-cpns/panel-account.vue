@@ -39,10 +39,10 @@ const loginStore = useLoginStore()
 function loginAction(isRemPwd: boolean) {
   formRef.value?.validate((valid) => {
     if (valid) {
-      // 获取用户输入的账号和密码
+      // 1.获取用户输入的账号和密码
       const name = account.name
       const password = account.password
-      // 向服务器发送请求
+      // 2.向服务器发送请求,根据是否点击保存密码保存用户信息到本地存储
       loginStore.loginAccountAction({ name, password }).then(() => {
         if (isRemPwd) {
           localCache.setCache(CACHE_NAME, name)
