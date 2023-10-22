@@ -1,5 +1,6 @@
 
 <script setup lang='ts'>
+import router from "@/router";
 import useLoginStore from "@/store/login/login";
 
 const loginStore = useLoginStore()
@@ -10,6 +11,10 @@ defineProps({
     default: false
   }
 })
+function handleItemClick(item: any) {
+  const url = item.url
+  router.push(url)
+}
 </script>
 
 <template>
@@ -32,7 +37,7 @@ defineProps({
             </template>
             <!-- 遍历菜单的子元素 -->
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''">{{ subitem.name }}</el-menu-item>
+              <el-menu-item :index="subitem.id + ''" @click="handleItemClick(subitem)"> {{ subitem.name }} </el-menu-item>
             </template>
           </el-sub-menu>
         </template>

@@ -11,11 +11,31 @@ const router = createRouter({
     },
     {
       path: '/login',
-      component: () => import("../views/login.vue/Login.vue")
+      component: () => import("../views/login/Login.vue")
     },
     {
       path: '/main',
-      component: () => import("../views/main.vue/Main.vue")
+      component: () => import('../views/main/Main.vue'),
+      children: [
+        {
+          path: '/main/analysis/overview',
+          component: () =>
+            import('../views/main/analysis/overview/overview.vue')
+        },
+        {
+          path: '/main/analysis/dashboard',
+          component: () =>
+            import('../views/main/analysis/dashboard/dashboard.vue')
+        },
+        {
+          path: '/main/system/user',
+          component: () => import('../views/main/system/user/user.vue')
+        },
+        {
+          path: '/main/system/role',
+          component: () => import('../views/main/system/role/role.vue')
+        }
+      ]
     },
     {
       path: '/:pathMatch(.*)',
