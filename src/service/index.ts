@@ -1,7 +1,7 @@
 import { localCache } from '@/utils/cache'
 import { BASE_URL, TIME_OUT } from './config'
 import HMYRequest from './request'
-import { LOGIN_TOKEN } from '@/components/gobal/constants'
+import { LOGIN_TOKEN } from '@/gobal/constants'
 
 const hmyRequest = new HMYRequest({
   baseURL: BASE_URL,

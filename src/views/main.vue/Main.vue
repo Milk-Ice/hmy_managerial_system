@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import MianMenu from "@/components/mian-menu/mian-menu.vue";
 import MainHeader from "@/components/main-header/mian-header.vue"
+
 </script>
 
 <template>

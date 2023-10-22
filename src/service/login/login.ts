@@ -16,7 +16,7 @@ export function getUserInfoById(id: number) {
   })
 }
 // 根据id获取用户角色菜单
-export function getUserMenuById(id: number) {
+export function getUserMenusByRoleId(id: number) {
   return myRequest.get({
     url: `/role/${id}/menu`
   })

@@ -1,4 +1,4 @@
-import { LOGIN_TOKEN } from "@/components/gobal/constants";
+import { LOGIN_TOKEN } from "@/gobal/constants";
 import { localCache } from "@/utils/cache";
 import { createRouter, createWebHashHistory } from "vue-router";
 

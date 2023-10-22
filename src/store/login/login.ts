@@ -1,9 +1,14 @@
-import { accountLoginRequest, getUserInfoById, getUserMenuById } from "@/service/login/login";
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
+import {
+  accountLoginRequest,
+  getUserInfoById,
+  getUserMenusByRoleId
+} from '@/service/login/login'
+import type { IAccount } from '@/types/login'
 import { localCache } from '@/utils/cache'
-import type { IAccount } from "@/types/login"
-import { LOGIN_TOKEN } from "@/components/gobal/constants";
-import router from "@/router";
+import router from '@/router'
+import { LOGIN_TOKEN } from '@/gobal/constants'
+
 interface ILoginState {
   token: string
   userInfo: any
@@ -11,32 +16,38 @@ interface ILoginState {
 }
 
 const useLoginStore = defineStore('login', {
+  // 如何制定state的类型
   state: (): ILoginState => ({
     token: localCache.getCache(LOGIN_TOKEN) ?? '',
-    userInfo: {},
-    userMenus: []
+    userInfo: localCache.getCache('userInfo') ?? {},
+    userMenus: localCache.getCache('userMenus') ?? []
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
+      // 1.账号登录, 获取token等信息
       const loginResult = await accountLoginRequest(account)
       const id = loginResult.data.id
       this.token = loginResult.data.token
-
-      // 2.进行本地缓存
       localCache.setCache(LOGIN_TOKEN, this.token)
 
-      // 3.获取用户登陆的详细信息
-      const userInfoReault = await getUserInfoById(id)
-      this.userInfo = userInfoReault.data
-      console.log(this.userInfo.role)
+      // 2.获取登录用户的详细信息(role信息)
+      const userInfoResult = await getUserInfoById(id)
+      const userInfo = userInfoResult.data
+      this.userInfo = userInfo
 
-      //4.根据角色获取用户的权限
-      const userMenuResult = await getUserMenuById(this.userInfo.role.id)
-      this.userMenus = userMenuResult.data
+      // 3.根据角色请求用户的权限(菜单menus)
+      const userMenusResult = await getUserMenusByRoleId(this.userInfo.role.id)
+      const userMenus = userMenusResult.data
+      this.userMenus = userMenus
+
+      // 4.进行本地缓存
+      localCache.setCache('userInfo', userInfo)
+      localCache.setCache('userMenus', userMenus)
 
       // 5.页面跳转(main页面)
       router.push('/main')
     }
   }
 })
+
 export default useLoginStore
