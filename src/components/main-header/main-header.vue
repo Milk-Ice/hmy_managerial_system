@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
+import HeaderInfo from "./c-cpns/header-info/header-info.vue"
 const isFold = ref(false)
 function handleMenuIconClick() {
   // console.log(11)
@@ -19,7 +20,9 @@ const emit = defineEmits(['foldchange'])
     </div>
     <div class="content">
       <div class="bread">面包屑</div>
-      <div class="info">个人信息</div>
+      <div class="info">
+        <header-info />
+      </div>
     </div>
 
   </div>

@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import MianMenu from "@/components/mian-menu/mian-menu.vue";
-import MainHeader from "@/components/main-header/mian-header.vue"
+import MainHeader from "@/components/main-header/main-header.vue"
 import { ref } from "vue";
 const isFold = ref(false)
 function handleFoleChaneg(flag: boolean) {
@@ -20,7 +20,8 @@ function handleFoleChaneg(flag: boolean) {
         <el-header height="50px">
           <main-header @foldchange="handleFoleChaneg" />
         </el-header>
-        <el-main>Main</el-main>
+        <el-main>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -54,7 +55,7 @@ function handleFoleChaneg(flag: boolean) {
   }
 
   .el-header {
-    background-color: skyblue;
+    background-color: #fff;
   }
 
   .el-main {
