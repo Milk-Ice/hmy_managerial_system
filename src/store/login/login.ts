@@ -9,6 +9,7 @@ import { localCache } from '@/utils/cache'
 import router from '@/router'
 import { LOGIN_TOKEN } from '@/gobal/constants'
 import type { RouteRecordRaw } from 'vue-router'
+import { mapMenuToRoute } from '@/utils/map_menus'
 
 interface ILoginState {
   token: string
@@ -45,27 +46,10 @@ const useLoginStore = defineStore('login', {
       localCache.setCache('userInfo', userInfo)
       localCache.setCache('userMenus', userMenus)
 
-      // 1.获取菜单(userMenus代码写在位置)
 
-      // 2.动态获取所有的路由对象
-      // *放到数组路由对象都在独立的文件中
-      // *从文件中将所有路由对象先读取数组
-      const localRoute: RouteRecordRaw[] = []
-      // 获取所有的ts文件
-      const files = import.meta.glob('../../router/main/**/*.ts', { eager: true })//拿到的是对象类型
-      // console.log(files)
-      for (const key in files) {
-        const module = files[key]
-        // console.log(module.default)
-        localRoute.push(module.default)
-      }
-      // 3.根据菜单去匹配正确的路由router.addRoute('main', xxx)
-      for (const menu of userMenus) {
-        for (const submenu of menu.children) {
-          const route = localRoute.find((item) => item.path === submenu.url)
-          if (route) router.addRoute('main', route)
-        }
-      }
+      const routes = mapMenuToRoute(userMenus)
+      routes.forEach((route) => router.addRoute('main', route))
+      // console.log(routes)
 
       // 5.页面跳转(main页面)
       router.push('/main')

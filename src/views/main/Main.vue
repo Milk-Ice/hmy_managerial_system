@@ -17,10 +17,13 @@ function handleFoleChaneg(flag: boolean) {
       </el-aside>
       <!-- main页面 -->
       <el-container>
+        <!-- mian头部 -->
         <el-header height="50px">
           <main-header @foldchange="handleFoleChaneg" />
         </el-header>
+        <!-- mian主要内容 -->
         <el-main>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -58,9 +61,7 @@ function handleFoleChaneg(flag: boolean) {
     background-color: #fff;
   }
 
-  .el-main {
-    background-color: green;
-  }
+  .el-main {}
 
 
 }
