@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
+import headerCrumb from './c-cpns/header-crumb.vue';
 import HeaderInfo from "./c-cpns/header-info/header-info.vue"
 const isFold = ref(false)
 function handleMenuIconClick() {
@@ -19,7 +20,10 @@ const emit = defineEmits(['foldchange'])
       </el-icon>
     </div>
     <div class="content">
-      <div class="bread">面包屑</div>
+      <!-- 面包屑 -->
+      <div class="bread">
+        <header-crumb />
+      </div>
       <div class="info">
         <header-info />
       </div>

@@ -48,3 +48,22 @@ export function mapPathToMenu(path: string, userMenus: any[]) {
   }
   return undefined
 }
+interface IBreadcrumbs {
+  name: string
+  path: string
+}
+// 面包屑
+export function mapPathToBreadcrumb(path: string, userMenus: any[]) {
+  // 定义面包屑
+  const breadcrumb: IBreadcrumbs[] = []
+  // 遍历获取面包屑层级
+  for (const menu of userMenus) {
+    for (const submenu of menu.children) {
+      if (submenu.url === path) {
+        breadcrumb.push({ name: menu.name, path: menu.url })
+        breadcrumb.push({ name: submenu.name, path: submenu.url })
+      }
+    }
+  }
+  return breadcrumb
+}
