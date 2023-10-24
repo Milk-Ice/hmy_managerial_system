@@ -36,6 +36,11 @@
       </el-row>
 
     </el-form>
+    <div class="btns">
+      <el-button icon="Refresh">重置</el-button>
+      <el-button icon="Search" type="primary">查询</el-button>
+    </div>
+
   </div>
 </template>
 
@@ -48,5 +53,10 @@
 
 .el-form-item {
   padding: 5px 30px;
+}
+
+.btns {
+  text-align: right;
+  padding: 0 50px 10px 0;
 }
 </style>
