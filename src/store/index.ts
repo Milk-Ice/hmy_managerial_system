@@ -1,5 +1,5 @@
 import { createPinia } from "pinia";
 
-const pina = createPinia()
+const pinia = createPinia()
 
-export default pina
+export default pinia

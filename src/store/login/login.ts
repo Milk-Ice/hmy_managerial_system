@@ -8,7 +8,6 @@ import type { IAccount } from '@/types/login'
 import { localCache } from '@/utils/cache'
 import router from '@/router'
 import { LOGIN_TOKEN } from '@/gobal/constants'
-import type { RouteRecordRaw } from 'vue-router'
 import { mapMenuToRoute } from '@/utils/map_menus'
 
 interface ILoginState {
@@ -20,9 +19,9 @@ interface ILoginState {
 const useLoginStore = defineStore('login', {
   // 如何制定state的类型
   state: (): ILoginState => ({
-    token: localCache.getCache(LOGIN_TOKEN) ?? '',
-    userInfo: localCache.getCache('userInfo') ?? {},
-    userMenus: localCache.getCache('userMenus') ?? []
+    token: '',
+    userInfo: {},
+    userMenus: []
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
@@ -53,7 +52,22 @@ const useLoginStore = defineStore('login', {
 
       // 5.页面跳转(main页面)
       router.push('/main')
+    },
+    loadLoaclCacheAction() {
+      const token = localCache.getCache(LOGIN_TOKEN)
+      const userInfo = localCache.getCache('userInfo')
+      const userMenus = localCache.getCache('userMenus')
+      if (token && userInfo && userMenus) {
+        this.token = token
+        this.userInfo = userInfo
+        this.userMenus = userMenus
+
+        // 动态添加路由
+        const routes = mapMenuToRoute(userMenus)
+        routes.forEach((route) => router.addRoute('main', route))
+      }
     }
+
   }
 })
 
