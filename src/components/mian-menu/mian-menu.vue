@@ -2,9 +2,12 @@
 <script setup lang='ts'>
 import router from "@/router";
 import useLoginStore from "@/store/login/login";
-
+import { firstMenu, mapPathToMenu } from "@/utils/map_menus";
+import { ref } from 'vue'
+import { useRoute } from "vue-router";
 const loginStore = useLoginStore()
 const userMenu = loginStore.userMenus
+
 defineProps({
   isFold: {
     Boolean,
@@ -15,6 +18,10 @@ function handleItemClick(item: any) {
   const url = item.url
   router.push(url)
 }
+const route = useRoute()
+const pathMenu = mapPathToMenu(route.path, userMenu)
+const defaultActive = ref(pathMenu.id + '')
+// console.log(route.path)
 </script>
 
 <template>
@@ -24,7 +31,8 @@ function handleItemClick(item: any) {
       <h2 class="title" v-show="!isFold">管理系统</h2>
     </div>
     <div class="menu">
-      <el-menu text-color="#b7bdc3" active-text-color="#fff" background-color="#0a60bd" :collapse="isFold">
+      <el-menu :default-active="defaultActive" text-color="#b7bdc3" active-text-color="#fff" background-color="#0a60bd"
+        :collapse="isFold">
         <!-- 遍历整个菜单 -->
         <template v-for="item in userMenu" :key="item.id">
           <el-sub-menu :index="item.id + ''">

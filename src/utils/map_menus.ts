@@ -37,3 +37,14 @@ export function mapMenuToRoute(userMenus: any[]) {
   }
   return routes
 }
+
+// 根据路径匹配需要显示的菜单
+export function mapPathToMenu(path: string, userMenus: any[]) {
+  for (const menu of userMenus) {
+    for (const submenu of menu.children) {
+      if (submenu.url === path)
+        return submenu
+    }
+  }
+  return undefined
+}
