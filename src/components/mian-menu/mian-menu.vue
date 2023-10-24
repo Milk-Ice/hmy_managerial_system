@@ -1,9 +1,9 @@
 
 <script setup lang='ts'>
 import router from "@/router";
+import { computed } from "vue";
 import useLoginStore from "@/store/login/login";
-import { firstMenu, mapPathToMenu } from "@/utils/map_menus";
-import { ref } from 'vue'
+import { mapPathToMenu } from "@/utils/map_menus";
 import { useRoute } from "vue-router";
 const loginStore = useLoginStore()
 const userMenu = loginStore.userMenus
@@ -19,8 +19,10 @@ function handleItemClick(item: any) {
   router.push(url)
 }
 const route = useRoute()
-const pathMenu = mapPathToMenu(route.path, userMenu)
-const defaultActive = ref(pathMenu.id + '')
+const defaultActive = computed(() => {
+  const pathMenu = mapPathToMenu(route.path, userMenu)
+  return pathMenu.id + ''
+})
 // console.log(route.path)
 </script>
 

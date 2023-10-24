@@ -29,7 +29,14 @@ export function mapMenuToRoute(userMenus: any[]) {
   for (const menu of userMenus) {
     for (const submenu of menu.children) {
       const route = localRoute.find((item) => item.path === submenu.url)
-      if (route) routes.push(route)
+      if (route) {
+        // 给route顶层菜单添加重定向功能
+        if (!routes.find((item) => item.path === menu.url)) {
+          routes.push({ path: menu.url, redirect: route.path })
+        }
+        // 将二级菜单对应的路径加进去
+        routes.push(route)
+      }
 
       // 记录第一个匹配到的菜单
       if (!firstMenu && route) firstMenu = submenu
@@ -52,7 +59,13 @@ interface IBreadcrumbs {
   name: string
   path: string
 }
-// 面包屑
+
+/**
+ * 根据路径生成面包屑导航
+ * @param path 当前路由路径
+ * @param userMenus 用户菜单数据
+ * @returns 包含面包屑信息的数组
+ */
 export function mapPathToBreadcrumb(path: string, userMenus: any[]) {
   // 定义面包屑
   const breadcrumb: IBreadcrumbs[] = []
