@@ -37,13 +37,17 @@ fetchUserListData()
 function HandleDeleteClick(id: number) {
   systemStore.deleteUserListAction(id)
 }
+const emit = defineEmits(['newClick'])
+function HandleAddClick() {
+  emit('newClick')
+}
 </script>
 
 <template>
   <div class="content">
     <div class="header">
       <h3 class="title">用户列表</h3>
-      <el-button type="primary">新建用户</el-button>
+      <el-button type="primary" @click="HandleAddClick">新建用户</el-button>
     </div>
     <div class="table">
       <el-table :data="usersList" style="width: 100%" border>

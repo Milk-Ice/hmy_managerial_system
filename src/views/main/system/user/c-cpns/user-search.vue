@@ -13,7 +13,7 @@ const searchForm = reactive({
 const emit = defineEmits(['queryClick', 'resetClick'])
 // 2.
 function HandleQueryClick() {
-  emit('queryClick', searchForm)
+  emit('queryClick')
 }
 // 重置操作
 function hanleResetClick() {
@@ -25,7 +25,7 @@ function hanleResetClick() {
 // 查询操作
 function handleSearchClick() {
   HandleQueryClick()
-  console.log('Search-Click')
+  // console.log('Search-Click')
 }
 const formRef = ref<InstanceType<typeof ElForm>>()
 </script>

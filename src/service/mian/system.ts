@@ -12,3 +12,10 @@ export function deleteUserListData(id: number) {
     url: `/users/${id}`
   })
 }
+// 新增user
+export function addUserListData(queryInfo: any) {
+  return myRequest.post({
+    url: '/users',
+    data: queryInfo
+  })
+}
