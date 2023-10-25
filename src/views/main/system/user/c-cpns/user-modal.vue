@@ -1,9 +1,10 @@
 <script setup lang='ts'>
 import { ref, reactive } from 'vue'
-import useMainStore from '@/store/main/main'
 import { storeToRefs } from 'pinia';
-import department from '@/router/main/system/department/department';
-const dialogVisible = ref(true)
+import useMainStore from '@/store/main/main'
+import useSystemStore from '@/store/main/system/system'
+const dialogVisible = ref(false)
+const systemStore = useSystemStore()
 function setModalVisible() {
   dialogVisible.value = true
 }
@@ -19,6 +20,13 @@ defineExpose({ setModalVisible })
 
 const mainStore = useMainStore()
 const { entireRoles, entireDepartments } = storeToRefs(mainStore)
+
+//点击确认的逻辑
+function HandleConfirmClick() {
+  dialogVisible.value = false
+  // 创建新的用户
+  systemStore.newUserDataAction(formData)
+}
 </script>
 
 <template>
@@ -32,7 +40,7 @@ const { entireRoles, entireDepartments } = storeToRefs(mainStore)
           <el-input v-model="formData.realname" placeholder="请输入真实姓名" style="width: 300px;" />
         </el-form-item>
         <el-form-item label="密码:" prop="password">
-          <el-input v-model="formData.password" placeholder="请输入密码" style="width: 300px;" />
+          <el-input v-model="formData.password" placeholder="请输入密码" show-password style="width: 300px;" />
         </el-form-item>
         <el-form-item label="电话号码:" prop="cellPhone">
           <el-input v-model="formData.cellPhone" placeholder="请输入电话号码" style="width: 300px;" />
@@ -54,7 +62,7 @@ const { entireRoles, entireDepartments } = storeToRefs(mainStore)
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button type="primary" @click="dialogVisible = false">
+          <el-button type="primary" @click="HandleConfirmClick">
             确认
           </el-button>
           <el-button @click="dialogVisible = false">取消</el-button>
