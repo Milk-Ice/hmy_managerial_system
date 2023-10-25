@@ -24,7 +24,13 @@ const { usersList } = storeToRefs(systemStore)
         <el-table-column prop="name" label="用户名" width="180" align="center" />
         <el-table-column prop="realname" label="真实姓名" width="180" align="center" />
         <el-table-column prop="cellphone" label="手机号码" width="180" align="center" />
-        <el-table-column prop="enable" label="状态" width="100" align="center" />
+        <el-table-column prop="enable" label="状态" width="100" align="center">
+          <template #default="scoped">
+            <el-button :type="scoped.row.enable ? 'success' : 'danger'" plain>
+              {{ scoped.row.enable ? '启用' : '禁用' }}
+            </el-button>
+          </template>
+        </el-table-column>
         <el-table-column prop="createAt" label="创建时间" align="center" />
         <el-table-column prop="updateAt" label="更新事件" align="center" />
         <el-table-column label="操作" width="260" align="center">
