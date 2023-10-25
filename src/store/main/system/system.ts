@@ -1,4 +1,4 @@
-import { deleteUserListData, postUserListData } from "@/service/mian/system";
+import { deleteUserListData, postUserListData } from "@/service/mian/system/system";
 import { defineStore } from "pinia";
 import type { ISystemState } from '@/types/main/system/system'
 

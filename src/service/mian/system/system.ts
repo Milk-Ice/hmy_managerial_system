@@ -1,4 +1,4 @@
-import myRequest from '..'
+import myRequest from '../..'
 // 查询User
 export function postUserListData(queryInfo: any) {
   return myRequest.post({

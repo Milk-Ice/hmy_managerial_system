@@ -9,6 +9,7 @@ import { localCache } from '@/utils/cache'
 import router from '@/router'
 import { LOGIN_TOKEN } from '@/gobal/constants'
 import { mapMenuToRoute } from '@/utils/map_menus'
+import useMainStore from '../main/main'
 
 interface ILoginState {
   token: string
@@ -45,6 +46,9 @@ const useLoginStore = defineStore('login', {
       localCache.setCache('userInfo', userInfo)
       localCache.setCache('userMenus', userMenus)
 
+      // 请求所有的roles/department数据
+      const mainStore = useMainStore()
+      mainStore.fetchEntireRoleAction()
 
       const routes = mapMenuToRoute(userMenus)
       routes.forEach((route) => router.addRoute('main', route))
@@ -61,6 +65,10 @@ const useLoginStore = defineStore('login', {
         this.token = token
         this.userInfo = userInfo
         this.userMenus = userMenus
+
+        // 请求所有的roles/department数据
+        const mainStore = useMainStore()
+        mainStore.fetchEntireRoleAction()
 
         // 动态添加路由
         const routes = mapMenuToRoute(userMenus)
