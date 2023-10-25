@@ -1,14 +1,24 @@
 <script setup lang='ts'>
 import useSystemStore from '@/store/main/system/system'
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { formatUTC } from '@/utils/format'
 // 1.发起action，请求userList的数据
 const systemStore = useSystemStore()
 systemStore.postUserListAction()
 // 2.获取userList数据进行展示（转化为响应数据）
-const { usersList } = storeToRefs(systemStore)
+const { usersList, userTotalCount } = storeToRefs(systemStore)
+const currentPage = ref(1)
+const pageSize = ref(10)
 
-
+// 每一页展示数据发生改变
+function handleSizeChange() {
+  console.log('handleSizeChange')
+}
+// 页码发生改变
+function handleCurrentChange() {
+  console.log('handleCurrentChange')
+}
 </script>
 
 <template>
@@ -48,7 +58,11 @@ const { usersList } = storeToRefs(systemStore)
         </el-table-column>
       </el-table>
     </div>
-    <div class="pagenation">分页</div>
+    <div class="pagenation">
+      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[10, 20, 30]"
+        layout="total, sizes, prev, pager, next, jumper" :total="userTotalCount" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" />
+    </div>
   </div>
 </template>
 
@@ -79,5 +93,11 @@ const { usersList } = storeToRefs(systemStore)
     margin-left: 0;
     padding: 5px 8px;
   }
+}
+
+.el-pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 </style>
