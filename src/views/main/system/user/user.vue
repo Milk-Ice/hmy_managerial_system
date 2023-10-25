@@ -14,6 +14,7 @@ import UserContent from '@/views/main/system/user/c-cpns/user-content.vue'
 
 <style lang='less' scoped>
 .user {
-  color: red;
+  border-radius: 8px;
+  overflow: hidden;
 }
 </style>

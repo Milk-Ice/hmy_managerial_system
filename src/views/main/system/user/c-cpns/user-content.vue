@@ -11,7 +11,11 @@ const { usersList } = storeToRefs(systemStore)
 </script>
 
 <template>
-  <div class="user-content">
+  <div class="content">
+    <div class="header">
+      <h3 class="title">用户列表</h3>
+      <el-button type="primary">新建用户</el-button>
+    </div>
     <div class="table">
       <el-table :data="usersList" style="width: 100%" border>
         <el-table-column type="selection" width="55" />
@@ -34,7 +38,31 @@ const { usersList } = storeToRefs(systemStore)
 </template>
 
 <style lang='less' scoped>
-.user-content {
-  color: red;
+.content {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+
+  .title {
+    font-size: 22px;
+  }
+}
+
+.table {
+  :deep(.el-table__cell) {
+    padding: 12px 0;
+  }
+
+  .el-button {
+    margin-left: 0;
+    padding: 5px 8px;
+  }
 }
 </style>

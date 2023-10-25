@@ -61,7 +61,9 @@ function handleFoleChaneg(flag: boolean) {
     background-color: #fff;
   }
 
-  .el-main {}
+  .el-main {
+    background-color: #f0f2f5;
+  }
 
 
 }
