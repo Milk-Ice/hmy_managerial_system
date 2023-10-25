@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import useSystemStore from '@/store/main/system/system'
 import { storeToRefs } from 'pinia';
+import { formatUTC } from '@/utils/format'
 // 1.发起action，请求userList的数据
 const systemStore = useSystemStore()
 systemStore.postUserListAction()
@@ -31,8 +32,16 @@ const { usersList } = storeToRefs(systemStore)
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="createAt" label="创建时间" align="center" />
-        <el-table-column prop="updateAt" label="更新事件" align="center" />
+        <el-table-column prop="createAt" label="创建时间" align="center">
+          <template #default="scoped">
+            {{ formatUTC(scoped.row.createAt) }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="updateAt" label="更新事件" align="center">
+          <template #default="scoped">
+            {{ formatUTC(scoped.row.updateAt) }}
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="260" align="center">
           <el-button type="primary" text icon="Edit">编辑</el-button>
           <el-button type="danger" text icon="Delete">删除</el-button>
