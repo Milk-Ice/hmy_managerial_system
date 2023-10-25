@@ -20,14 +20,17 @@ function handleCurrentChange() {
   fetchUserListData()
 }
 // 封装发送请求的函数
-function fetchUserListData() {
+function fetchUserListData(formData: any = {}) {
   // 获取size，offset
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
-  const info = { size, offset }
+  const pageInfo = { size, offset }
+  const queryInfo = { ...pageInfo, ...formData }
+  // console.log(queryInfo)
   // 发送网络请求
-  systemStore.postUserListAction(info)
+  systemStore.postUserListAction(queryInfo)
 }
+defineExpose({ fetchUserListData })
 fetchUserListData()
 </script>
 

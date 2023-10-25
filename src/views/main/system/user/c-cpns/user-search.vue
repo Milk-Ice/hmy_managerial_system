@@ -7,15 +7,24 @@ const searchForm = reactive({
   realname: '',
   cellPhone: '',
   enanle: '',
-  createAt: [],
+  createAt: '',
 })
-
+// 1.自定义事件
+const emit = defineEmits(['queryClick', 'resetClick'])
+// 2.
+function HandleQueryClick() {
+  emit('queryClick', searchForm)
+}
 // 重置操作
 function hanleResetClick() {
+  // formData里数据重置
   formRef.value?.resetFields()
+  // 事件发射出去，content内部重新发送网络请求
+  emit('resetClick')
 }
 // 查询操作
 function handleSearchClick() {
+  HandleQueryClick()
   console.log('Search-Click')
 }
 const formRef = ref<InstanceType<typeof ElForm>>()
@@ -60,7 +69,6 @@ const formRef = ref<InstanceType<typeof ElForm>>()
       <el-button icon="Refresh" @click="hanleResetClick">重置</el-button>
       <el-button icon="Search" type="primary" @click="handleSearchClick">查询</el-button>
     </div>
-
   </div>
 </template>
 
