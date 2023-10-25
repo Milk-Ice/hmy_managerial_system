@@ -32,6 +32,11 @@ function fetchUserListData(formData: any = {}) {
 }
 defineExpose({ fetchUserListData })
 fetchUserListData()
+
+// 删除操作
+function HandleDeleteClick(id: number) {
+  systemStore.deleteUserListAction(id)
+}
 </script>
 
 <template>
@@ -65,10 +70,14 @@ fetchUserListData()
             {{ formatUTC(scoped.row.updateAt) }}
           </template>
         </el-table-column>
+        <!-- 新增、删除操作 -->
         <el-table-column label="操作" width="260" align="center">
-          <el-button type="primary" text icon="Edit">编辑</el-button>
-          <el-button type="danger" text icon="Delete">删除</el-button>
+          <template #default="scoped">
+            <el-button type="primary" text icon="Edit">编辑</el-button>
+            <el-button type="danger" text icon="Delete" @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
+          </template>
         </el-table-column>
+
       </el-table>
     </div>
     <div class="pagenation">
