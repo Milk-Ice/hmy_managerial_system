@@ -1,12 +1,18 @@
+<script setup lang='ts'>
+import DepartmentSearch from '../department/department-search.vue'
+import DepartmentContent from '../department/department-content.vue'
+</script>
+
 <template>
   <div class="department">
-    <h2>department</h2>
+    <department-search />
+    <department-content />
   </div>
 </template>
 
-<script setup lang="ts" name="department"></script>
-
-<style scoped>
+<style lang='less' scoped>
 .department {
+  border-radius: 8px;
+  overflow: hidden;
 }
 </style>
