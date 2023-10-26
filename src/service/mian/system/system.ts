@@ -43,16 +43,16 @@ export function deletePageListData(pageName: string, id: number) {
 }
 
 //创建用户
-export function newPageData(pageName: string, userInfo: any) {
+export function newPageData(pageName: string, pageInfo: any) {
   return myRequest.post({
     url: `/${pageName}`,
-    data: userInfo
+    data: pageInfo
   })
 }
 // 编辑用户
-export function editPageData(pageName: string, id: number, userInfo: any) {
+export function editPageData(pageName: string, id: number, pageInfo: any) {
   return myRequest.patch({
     url: `${pageName}/${id}`,
-    data: userInfo
+    data: pageInfo
   })
 }
