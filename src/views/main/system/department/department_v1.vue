@@ -1,14 +1,13 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
 // import DepartmentSearch from '@/views/main/system/department/c-cpns/department-search.vue'
-import PageSearch from '@/components/page-search/page-search.vue'
-import PageContent from '@/components/page-search/page-content.vue'
-import PageModal from '@/components/page-search/page-modal.vue'
-import searchConfig from './config/search.config'
+import DepartmentSearch from '@/components/page-search/page-search.vue'
+import DepartmentContent from '@/views/main/system/department/c-cpns/department-content.vue'
+import DepartmentModal from '@/views/main/system/department/c-cpns/department-modal.vue'
 
-const contentRef = ref<InstanceType<typeof PageContent>>()
-const searchRef = ref<InstanceType<typeof PageSearch>>()
-const modalRef = ref<InstanceType<typeof PageModal>>()
+const contentRef = ref<InstanceType<typeof DepartmentContent>>()
+const searchRef = ref<InstanceType<typeof DepartmentSearch>>()
+const modalRef = ref<InstanceType<typeof DepartmentModal>>()
 
 // 重置
 function HandleResetClick(queryInfo: any) {
@@ -31,10 +30,9 @@ function HandleEditClick(formData: any) {
 
 <template>
   <div class="department">
-    <page-search ref="searchRef" :search-config="searchConfig" @reset-click="HandleResetClick"
-      @query-click="HandleQueryClick" />
-    <page-content ref="contentRef" @edit-click="HandleEditClick" @new-click="HandleNewClick" />
-    <page-modal ref="modalRef" />
+    <department-search ref="searchRef" @reset-click="HandleResetClick" @query-click="HandleQueryClick" />
+    <department-content ref="contentRef" @edit-click="HandleEditClick" @new-click="HandleNewClick" />
+    <department-modal ref="modalRef" />
   </div>
 </template>
 

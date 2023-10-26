@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    DepartmentContent: typeof import('./src/components/page-search/department-content.vue')['default']
+    DepartmentModal: typeof import('./src/components/page-search/department-modal.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -43,6 +45,9 @@ declare module 'vue' {
     HeaderInfo: typeof import('./src/components/main-header/c-cpns/header-info/header-info.vue')['default']
     MainHeader: typeof import('./src/components/main-header/main-header.vue')['default']
     MianMenu: typeof import('./src/components/mian-menu/mian-menu.vue')['default']
+    PageContent: typeof import('./src/components/page-search/page-content.vue')['default']
+    PageModal: typeof import('./src/components/page-search/page-modal.vue')['default']
+    PageSearch: typeof import('./src/components/page-search/page-search.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
