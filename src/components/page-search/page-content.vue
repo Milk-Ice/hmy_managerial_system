@@ -1,8 +1,20 @@
 <script setup lang='ts'>
-import useSystemStore from '@/store/main/system/system'
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { formatUTC } from '@/utils/format'
+import useSystemStore from '@/store/main/system/system'
+import contentonfig from '@/views/main/system/department/config/content.config'
+
+interface IProps {
+  contentConfig: {
+    header?: {
+      title?: string
+      btnTitle?: string
+
+    }
+  }
+}
+const props = defineProps<IProps>()
 // 1.发起action，请求userList的数据
 const systemStore = useSystemStore()
 
@@ -52,8 +64,8 @@ function HandleEditClick(itemData: any) {
 <template>
   <div class="content">
     <div class="header">
-      <h3 class="title">部门列表</h3>
-      <el-button type="primary" @click="HandleAddClick">新建用户</el-button>
+      <h3 class="title">{{ contentConfig?.header?.title ?? '数据列表' }}</h3>
+      <el-button type="primary" @click="HandleAddClick">{{ contentConfig?.header?.btnTitle ?? '新建数据' }}</el-button>
     </div>
     <div class="table">
       <el-table :data="pageList" style="width: 100%" border>

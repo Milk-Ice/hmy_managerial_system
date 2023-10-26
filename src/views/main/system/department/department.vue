@@ -5,6 +5,7 @@ import PageSearch from '@/components/page-search/page-search.vue'
 import PageContent from '@/components/page-search/page-content.vue'
 import PageModal from '@/components/page-search/page-modal.vue'
 import searchConfig from './config/search.config'
+import contentConfig from './config/content.config';
 
 const contentRef = ref<InstanceType<typeof PageContent>>()
 const searchRef = ref<InstanceType<typeof PageSearch>>()
@@ -33,7 +34,8 @@ function HandleEditClick(formData: any) {
   <div class="department">
     <page-search ref="searchRef" :search-config="searchConfig" @reset-click="HandleResetClick"
       @query-click="HandleQueryClick" />
-    <page-content ref="contentRef" @edit-click="HandleEditClick" @new-click="HandleNewClick" />
+    <page-content ref="contentRef" :content-config="contentConfig" @edit-click="HandleEditClick"
+      @new-click="HandleNewClick" />
     <page-modal ref="modalRef" />
   </div>
 </template>

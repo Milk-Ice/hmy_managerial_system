@@ -10,7 +10,7 @@ interface IProps {
 const props = defineProps<IProps>()
 
 const initialForm: any = {}
-console.log(props)
+// console.log(props)
 // 定义Form的数据
 for (const item of props.searchConfig.formItems) {
   initialForm[item.prop] = item.initialForm ?? ''
