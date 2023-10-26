@@ -3,15 +3,17 @@ import UserSearch from '@/views/main/system/user/c-cpns/user-search.vue'
 import UserContent from '@/views/main/system/user/c-cpns/user-content.vue'
 import UserModal from '@/views/main/system/user/c-cpns/user-modal.vue'
 import { ref } from 'vue';
+// 查询
 function HandleQueryClick(formData: any) {
   // console.log(formData)
   contentRef.value?.fetchUserListData(formData)
 }
+// 重置
 function HandleResetClick() {
   contentRef.value?.fetchUserListData()
 }
 const modalRef = ref<InstanceType<typeof UserModal>>()
-
+// 新增
 function HandleNewBtnClick(itemData: any) {
   console.log('HandleNewBtnClick')
   modalRef.value?.setModalVisible(itemData)

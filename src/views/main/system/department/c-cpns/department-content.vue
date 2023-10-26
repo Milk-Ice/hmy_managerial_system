@@ -7,31 +7,31 @@ import { formatUTC } from '@/utils/format'
 const systemStore = useSystemStore()
 
 // 2.获取userList数据进行展示（转化为响应数据）
-const { usersList, userTotalCount } = storeToRefs(systemStore)
+const { pageList, pageToTalCount } = storeToRefs(systemStore)
 const currentPage = ref(1)
 const pageSize = ref(10)
 
 // 每一页展示数据发生改变
 function handleSizeChange() {
-  fetchUserListData()
+  fetchPageListData()
 }
 // 页码发生改变
 function handleCurrentChange() {
-  fetchUserListData()
+  fetchPageListData()
 }
 // 封装发送请求的函数
-function fetchUserListData(formData: any = {}) {
+function fetchPageListData(formData: any = {}) {
   // 获取size，offset
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
   const pageInfo = { size, offset }
   const queryInfo = { ...pageInfo, ...formData }
-  // console.log(queryInfo)
+  console.log('请求参数', queryInfo)
   // 发送网络请求
-  systemStore.postUserListAction(queryInfo)
+  systemStore.postPageListAction('department', queryInfo)
 }
-defineExpose({ fetchUserListData })
-fetchUserListData()
+defineExpose({ fetchPageListData })
+fetchPageListData()
 
 // 删除操作
 function HandleDeleteClick(id: number) {
@@ -55,7 +55,7 @@ function HandleEditClick(itemData: any) {
       <el-button type="primary" @click="HandleAddClick">新建用户</el-button>
     </div>
     <div class="table">
-      <el-table :data="usersList" style="width: 100%" border>
+      <el-table :data="pageList" style="width: 100%" border>
         <el-table-column type="selection" width="55" />
         <el-table-column label="序号" type="index" width="55" />
 
@@ -84,7 +84,7 @@ function HandleEditClick(itemData: any) {
     </div>
     <div class="pagenation">
       <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[10, 20, 30]"
-        layout="total, sizes, prev, pager, next, jumper" :total="userTotalCount" @size-change="handleSizeChange"
+        layout="total, sizes, prev, pager, next, jumper" :total="pageToTalCount" @size-change="handleSizeChange"
         @current-change="handleCurrentChange" />
     </div>
   </div>

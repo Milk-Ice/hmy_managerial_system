@@ -5,16 +5,13 @@ import { reactive, ref } from 'vue';
 const searchForm = reactive({
   name: '',
   realname: '',
-  cellPhone: '',
-  enanle: '',
+  cellphone: '',
+  enable: '',
   createAt: '',
 })
 // 1.自定义事件
 const emit = defineEmits(['queryClick', 'resetClick'])
-// 2.
-function HandleQueryClick() {
-  emit('queryClick')
-}
+
 // 重置操作
 function hanleResetClick() {
   // formData里数据重置
@@ -23,8 +20,8 @@ function hanleResetClick() {
   emit('resetClick')
 }
 // 查询操作
-function handleSearchClick() {
-  HandleQueryClick()
+function handleQueryClick() {
+  emit('queryClick', searchForm)
   // console.log('Search-Click')
 }
 const formRef = ref<InstanceType<typeof ElForm>>()
@@ -45,12 +42,12 @@ const formRef = ref<InstanceType<typeof ElForm>>()
         </el-col>
         <el-col :span="8">
           <el-form-item label="手机号码" prop="cellPhone">
-            <el-input v-model="searchForm.cellPhone" placeholder="请输入查询的手机号码"></el-input>
+            <el-input v-model="searchForm.cellphone" placeholder="请输入查询的手机号码"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="状态" prop="enanle">
-            <el-select v-model="searchForm.cellPhone" placeholder="请选择查询的状态" style="width: 100%;">
+          <el-form-item label="状态" prop="enable">
+            <el-select v-model="searchForm.enable" placeholder="请选择查询的状态" style="width: 100%;">
               <el-option label="启用" :value="1" />
               <el-option label="禁用" :value="0" />
             </el-select>
@@ -67,7 +64,7 @@ const formRef = ref<InstanceType<typeof ElForm>>()
     </el-form>
     <div class="btns">
       <el-button icon="Refresh" @click="hanleResetClick">重置</el-button>
-      <el-button icon="Search" type="primary" @click="handleSearchClick">查询</el-button>
+      <el-button icon="Search" type="primary" @click="handleQueryClick">查询</el-button>
     </div>
   </div>
 </template>

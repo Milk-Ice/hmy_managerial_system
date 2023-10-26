@@ -4,16 +4,11 @@ import { reactive, ref } from 'vue';
 
 const searchForm = reactive({
   name: '',
-  realname: '',
   leader: '',
   createAt: '',
 })
 // 1.自定义事件
 const emit = defineEmits(['queryClick', 'resetClick'])
-// 2.
-function HandleQueryClick() {
-  emit('queryClick')
-}
 // 重置操作
 function hanleResetClick() {
   // formData里数据重置
@@ -22,8 +17,8 @@ function hanleResetClick() {
   emit('resetClick')
 }
 // 查询操作
-function handleSearchClick() {
-  HandleQueryClick()
+function handleQueryClick() {
+  emit('queryClick', searchForm)
   // console.log('Search-Click')
 }
 const formRef = ref<InstanceType<typeof ElForm>>()
@@ -53,7 +48,7 @@ const formRef = ref<InstanceType<typeof ElForm>>()
     </el-form>
     <div class="btns">
       <el-button icon="Refresh" @click="hanleResetClick">重置</el-button>
-      <el-button icon="Search" type="primary" @click="handleSearchClick">查询</el-button>
+      <el-button icon="Search" type="primary" @click="handleQueryClick">查询</el-button>
     </div>
   </div>
 </template>

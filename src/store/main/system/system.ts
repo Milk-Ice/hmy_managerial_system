@@ -1,20 +1,25 @@
-import { deleteUserListData, editUserData, newUserData, postUserListData } from "@/service/mian/system/system";
+import { deleteUserListData, editUserData, newUserData, postPageListData, postUserListData } from "@/service/mian/system/system";
 import { defineStore } from "pinia";
 import type { ISystemState } from '@/types/main/system/system'
 
 const useSystemStore = defineStore('system', {
   state: (): ISystemState => ({
     usersList: [],
-    userTotalCount: 0
+    userTotalCount: 0,
+
+    pageList: [],
+    pageToTalCount: 0,
+
   }),
   actions: {
-    async postUserListAction(queryInfo) {
+    async postUserListAction(queryInfo: any) {
       const userListResult = await postUserListData(queryInfo)
       // console.log(userListResult)
       const { list, totalCount } = userListResult.data
       // console.log(list)
       this.userTotalCount = totalCount
       this.usersList = list
+
     },
     async deleteUserListAction(id: number) {
       //1. 删除数据操作
@@ -34,6 +39,14 @@ const useSystemStore = defineStore('system', {
       const editUserInfoResult = editUserData(id, userInfo)
       // console.log(editUserInfoResult)
       this.postUserListAction({ offset: 0, size: 10 })
+    },
+    // 针对页面的网络请求，增删改查
+    async postPageListAction(pageName: string, queryInfo: any) {
+      const pageListResult = await postPageListData(pageName, queryInfo)
+      const { totalCount, list } = pageListResult.data
+      console.log(pageListResult)
+      this.pageList = list
+      this.pageToTalCount = totalCount
     }
   }
 
