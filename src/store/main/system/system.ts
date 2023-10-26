@@ -1,4 +1,4 @@
-import { deleteUserListData, editUserData, newUserData, postPageListData, postUserListData } from "@/service/mian/system/system";
+import { deletePageListData, deleteUserListData, editUserData, newUserData, postPageListData, postUserListData } from "@/service/mian/system/system";
 import { defineStore } from "pinia";
 import type { ISystemState } from '@/types/main/system/system'
 
@@ -47,6 +47,12 @@ const useSystemStore = defineStore('system', {
       console.log(pageListResult)
       this.pageList = list
       this.pageToTalCount = totalCount
+    },
+    // 删除
+    async deletePageByIdAction(pageName: string, id: number) {
+      const deleteResult = await deletePageListData(pageName, id)
+
+      this.postUserListAction({ offset: 0, size: 10 })
     }
   }
 

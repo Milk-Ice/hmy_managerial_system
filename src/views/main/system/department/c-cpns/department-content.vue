@@ -35,7 +35,8 @@ fetchPageListData()
 
 // 删除操作
 function HandleDeleteClick(id: number) {
-  systemStore.deleteUserListAction(id)
+  systemStore.deletePageByIdAction('department', id)
+  fetchPageListData()
 }
 const emit = defineEmits(['newClick', 'editClick'])
 function HandleAddClick() {

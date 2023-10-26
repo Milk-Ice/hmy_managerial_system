@@ -36,6 +36,8 @@ fetchUserListData()
 // 删除操作
 function HandleDeleteClick(id: number) {
   systemStore.deleteUserListAction(id)
+
+  fetchUserListData()
 }
 const emit = defineEmits(['newClick', 'editClick'])
 function HandleAddClick() {
