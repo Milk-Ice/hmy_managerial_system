@@ -37,9 +37,14 @@ fetchUserListData()
 function HandleDeleteClick(id: number) {
   systemStore.deleteUserListAction(id)
 }
-const emit = defineEmits(['newClick'])
+const emit = defineEmits(['newClick', 'editClick'])
 function HandleAddClick() {
   emit('newClick')
+}
+// 编辑操作
+function HandleEditClick(itemData: any) {
+  // console.log('edit', itemData)
+  emit('editClick', itemData)
 }
 </script>
 
@@ -77,7 +82,7 @@ function HandleAddClick() {
         <!-- 新增、删除操作 -->
         <el-table-column label="操作" width="260" align="center">
           <template #default="scoped">
-            <el-button type="primary" text icon="Edit">编辑</el-button>
+            <el-button type="primary" text icon="Edit" @click="HandleEditClick(scoped.row)">编辑</el-button>
             <el-button type="danger" text icon="Delete" @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
           </template>
         </el-table-column>

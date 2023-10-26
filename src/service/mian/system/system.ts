@@ -20,3 +20,10 @@ export function newUserData(userInfo: any) {
     data: userInfo
   })
 }
+// 编辑用户
+export function editUserData(id: number, userInfo: any) {
+  return myRequest.patch({
+    url: `users/${id}`,
+    data: userInfo
+  })
+}

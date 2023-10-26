@@ -5,33 +5,54 @@ import useMainStore from '@/store/main/main'
 import useSystemStore from '@/store/main/system/system'
 const dialogVisible = ref(false)
 const systemStore = useSystemStore()
-function setModalVisible() {
+function setModalVisible(isNew: boolean = true, itemData?: any) {
   dialogVisible.value = true
+  isNewRef.value = isNew
+  // 编辑操作
+  if (!isNew && itemData) {
+    for (const key in formData) {
+      formData[key] = itemData[key]
+    }
+    editData.value = itemData
+  } else {
+    // 新增操作
+    for (const key in formData) {
+      formData[key] = ''
+    }
+    editData.value = null
+  }
 }
 const formData = reactive({
   name: '',
   password: '',
   realname: '',
-  cellPhone: '',
+  cellphone: '',
   departmentId: '',
   roleId: ''
 })
+const isNewRef = ref(true)
 defineExpose({ setModalVisible })
-
+const editData = ref()
 const mainStore = useMainStore()
 const { entireRoles, entireDepartments } = storeToRefs(mainStore)
 
 //点击确认的逻辑
 function HandleConfirmClick() {
   dialogVisible.value = false
-  // 创建新的用户
-  systemStore.newUserDataAction(formData)
+  // 新建用户
+  if (isNewRef.value) {
+    // 创建新的用户
+    systemStore.newUserDataAction(formData)
+  } else {//编辑用户
+    systemStore.editUserDataAction(editData.value.id, formData)
+  }
+
 }
 </script>
 
 <template>
   <div class="user-modal">
-    <el-dialog v-model="dialogVisible" title="新增用户" width="30%" center>
+    <el-dialog v-model="dialogVisible" :title="isNewRef ? '新增用户' : '编辑用户'" width="30%" center>
       <el-form :model="formData" label-width="100px">
         <el-form-item label="用户名:" prop="name">
           <el-input v-model="formData.name" placeholder="请输入用户名" style="width: 300px;" />
@@ -39,11 +60,11 @@ function HandleConfirmClick() {
         <el-form-item label="真实姓名:" prop="realname">
           <el-input v-model="formData.realname" placeholder="请输入真实姓名" style="width: 300px;" />
         </el-form-item>
-        <el-form-item label="密码:" prop="password">
+        <el-form-item v-if="isNewRef" label="密码:" prop="password">
           <el-input v-model="formData.password" placeholder="请输入密码" show-password style="width: 300px;" />
         </el-form-item>
         <el-form-item label="电话号码:" prop="cellPhone">
-          <el-input v-model="formData.cellPhone" placeholder="请输入电话号码" style="width: 300px;" />
+          <el-input v-model="formData.cellphone" placeholder="请输入电话号码" style="width: 300px;" />
         </el-form-item>
         <el-form-item label="选择角色:" prop="roleId">
           <el-select v-model="formData.roleId" placeholder="请选择角色">

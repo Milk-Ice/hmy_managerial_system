@@ -12,11 +12,17 @@ function HandleResetClick() {
 }
 const modalRef = ref<InstanceType<typeof UserModal>>()
 
-function HandleNewBtnClick() {
+function HandleNewBtnClick(itemData: any) {
   console.log('HandleNewBtnClick')
-  modalRef.value?.setModalVisible()
+  modalRef.value?.setModalVisible(itemData)
 }
 const contentRef = ref<InstanceType<typeof UserContent>>()
+
+// 编辑操作
+function HandleEditClick(itemData: any) {
+  // console.log(itemData)
+  modalRef.value?.setModalVisible(false, itemData)
+}
 </script>
 
 <template>
@@ -24,7 +30,7 @@ const contentRef = ref<InstanceType<typeof UserContent>>()
     <div class="search">
       <user-search @query-click="HandleQueryClick" @reset-click="HandleResetClick" />
     </div>
-    <user-content ref="contentRef" @new-click="HandleNewBtnClick" />
+    <user-content ref="contentRef" @new-click="HandleNewBtnClick" @edit-click="HandleEditClick" />
     <user-modal ref="modalRef" />
   </div>
 </template>

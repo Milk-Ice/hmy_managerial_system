@@ -1,4 +1,4 @@
-import { deleteUserListData, newUserData, postUserListData } from "@/service/mian/system/system";
+import { deleteUserListData, editUserData, newUserData, postUserListData } from "@/service/mian/system/system";
 import { defineStore } from "pinia";
 import type { ISystemState } from '@/types/main/system/system'
 
@@ -26,7 +26,13 @@ const useSystemStore = defineStore('system', {
     // 创建新的user
     async newUserDataAction(userInfo: any) {
       const userInfoResult = await newUserData(userInfo)
-      console.log(userInfoResult)
+      // console.log(userInfoResult)
+      this.postUserListAction({ offset: 0, size: 10 })
+    },
+    // 编辑操作
+    async editUserDataAction(id: number, userInfo: any) {
+      const editUserInfoResult = editUserData(id, userInfo)
+      // console.log(editUserInfoResult)
       this.postUserListAction({ offset: 0, size: 10 })
     }
   }
