@@ -1,12 +1,11 @@
 <script setup lang='ts'>
 import { ref, reactive } from 'vue'
-import { storeToRefs } from 'pinia';
-import useMainStore from '@/store/main/main'
 import useSystemStore from '@/store/main/system/system'
 
 // 定义父组件传来的类型
-interface IProps {
+interface IModalProps {
   modalConfig: {
+    pageName: string
     header: {
       newTitle: string,
       editTitle: string
@@ -15,7 +14,8 @@ interface IProps {
   }
 }
 // 接收父组件传来的数据
-const props = defineProps<IProps>()
+const props = defineProps<IModalProps>()
+// console.log(props.modalConfig)
 // 控制Modal的显示和隐藏
 const dialogVisible = ref(false)
 const systemStore = useSystemStore()
@@ -40,7 +40,7 @@ function setModalVisible(isNew: boolean = true, itemData?: any) {
 // 遍历将formData的属性给initalData
 const initialData: any = {}
 for (const item of props.modalConfig.formItems) {
-  initialData[item.prop] = item.initialForm ?? ''
+  initialData[item.prop] = item.initialValue ?? ''
 }
 const formData = reactive<any>(initialData)
 const isNewRef = ref(true)
@@ -48,8 +48,6 @@ const isNewRef = ref(true)
 defineExpose({ setModalVisible })
 const editData = ref()
 // 获取roles、department的数据
-const mainStore = useMainStore()
-const { entireDepartments } = storeToRefs(mainStore)
 
 //点击确认的逻辑
 function HandleConfirmClick() {
@@ -57,9 +55,9 @@ function HandleConfirmClick() {
   // 新建用户
   if (isNewRef.value) {
     // 创建新的用户
-    systemStore.newPageDataAction('department', formData)
+    systemStore.newPageDataAction(props.modalConfig.pageName, formData)
   } else {//编辑用户
-    systemStore.editPageDataAction('department', editData.value.id, formData)
+    systemStore.editPageDataAction(props.modalConfig.pageName, editData.value.id, formData)
   }
 
 }
@@ -72,19 +70,20 @@ function HandleConfirmClick() {
       <el-form :model="formData" label-width="100px">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
           <el-form-item :label="item.label" :prop="item.name">
-            <el-input v-model="formData[item.prop]" placeholder="请输入部门名称" style="width: 300px;" />
+            <template v-if="item.type === 'input'">
+              <el-input v-model="formData[item.prop]" :placeholder="item.placeholder" style="width: 300px;" />
+            </template>
+            <template v-if="item.type === 'select'">
+              <el-select v-model="formData[item.props]" :placeholder="item.placeholder" style="width: 300px;">
+                <template v-for="option in item.options" :key="option.value">
+                  <el-option :label="option.label" :value="option.value"></el-option>
+                </template>
+              </el-select>
+            </template>
           </el-form-item>
         </template>
-
-        <el-form-item label="上级部门:" prop="parentId">
-          <el-select v-model="formData.parentId" placeholder="请选择上级部门" style="width: 300px;">
-            <template v-for="item in entireDepartments" :key="item.id">
-              <el-option :label="item.name" :value="item.id"></el-option>
-            </template>
-          </el-select>
-        </el-form-item>
-
       </el-form>
+
       <template #footer>
         <span class="dialog-footer">
           <el-button type="primary" @click="HandleConfirmClick">

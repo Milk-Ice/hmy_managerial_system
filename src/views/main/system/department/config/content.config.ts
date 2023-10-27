@@ -13,8 +13,8 @@ const contentConfig = {
     { type: 'normal', label: '上级部门', prop: 'parentId', width: '150px' },
 
     // 自定义
-    { type: 'custom', label: '部门领导', prop: 'leader', width: '150px', slotName: 'leader' },
-    { type: 'custom', label: '上级部门', prop: 'parentId', width: '150px', slotName: 'parent' },
+    // { type: 'custom', label: '部门领导', prop: 'leader', width: '150px', slotName: 'leader' },
+    // { type: 'custom', label: '上级部门', prop: 'parentId', width: '150px', slotName: 'parent' },
 
     { type: 'timer', label: '创建时间', prop: 'createAt' },
     { type: 'timer', label: '更新时间', prop: 'updateAt' },
