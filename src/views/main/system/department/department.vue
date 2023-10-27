@@ -35,7 +35,12 @@ function HandleEditClick(formData: any) {
     <page-search ref="searchRef" :search-config="searchConfig" @reset-click="HandleResetClick"
       @query-click="HandleQueryClick" />
     <page-content ref="contentRef" :content-config="contentConfig" @edit-click="HandleEditClick"
-      @new-click="HandleNewClick" />
+      @new-click="HandleNewClick">
+      <template #leader="scope">自定义{{ scope.row[scope.prop] }}
+      </template>
+      <template #parent="scope">自定义{{ scope.row[scope.prop] }}
+      </template>
+    </page-content>
     <page-modal ref="modalRef" />
   </div>
 </template>

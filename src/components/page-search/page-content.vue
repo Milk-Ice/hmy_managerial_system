@@ -86,14 +86,18 @@ function HandleEditClick(itemData: any) {
               </template>
             </el-table-column>
           </template>
+          <template v-else-if="item.type === 'custom'">
+            <el-table-column v-bind="item" align="center">
+              <template #default="scope">
+                <slot :name="item.slotName" v-bind="scope" :prop="item.prop"></slot>
+              </template>
+            </el-table-column>
+          </template>
           <template v-else>
             <el-table-column v-bind="item" align="center" />
           </template>
 
         </template>
-
-
-
       </el-table>
     </div>
     <div class="pagenation">
