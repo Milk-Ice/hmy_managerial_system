@@ -88,7 +88,7 @@ function HandleEditClick(itemData: any) {
             </el-table-column>
           </template>
           <template v-else-if="item.type === 'custom'">
-            <el-table-column v-bind="item" align="center">
+            <el-table-column v-bind="item" align="center" width="400px">
               <template #default="scope">
                 <slot :name="item.slotName" v-bind="scope" :prop="item.prop"></slot>
               </template>
@@ -134,7 +134,7 @@ function HandleEditClick(itemData: any) {
 
   .el-button {
     margin-left: 0;
-    padding: 5px 8px;
+    padding: 5px 20px;
   }
 }
 
