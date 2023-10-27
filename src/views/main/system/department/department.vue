@@ -6,6 +6,7 @@ import PageContent from '@/components/page-search/page-content.vue'
 import PageModal from '@/components/page-search/page-modal.vue'
 import searchConfig from './config/search.config'
 import contentConfig from './config/content.config';
+import modalConfig from './config/modal.config';
 
 const contentRef = ref<InstanceType<typeof PageContent>>()
 const searchRef = ref<InstanceType<typeof PageSearch>>()
@@ -41,7 +42,7 @@ function HandleEditClick(formData: any) {
       <template #parent="scope">自定义{{ scope.row[scope.prop] }}
       </template>
     </page-content>
-    <page-modal ref="modalRef" />
+    <page-modal :modal-config="modalConfig" ref="modalRef" />
   </div>
 </template>
 

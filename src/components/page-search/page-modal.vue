@@ -3,8 +3,23 @@ import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia';
 import useMainStore from '@/store/main/main'
 import useSystemStore from '@/store/main/system/system'
+
+// 定义父组件传来的类型
+interface IProps {
+  modalConfig: {
+    header: {
+      newTitle: string,
+      editTitle: string
+    },
+    formItems: any[]
+  }
+}
+// 接收父组件传来的数据
+const props = defineProps<IProps>()
+// 控制Modal的显示和隐藏
 const dialogVisible = ref(false)
 const systemStore = useSystemStore()
+// 弹出modal的逻辑
 function setModalVisible(isNew: boolean = true, itemData?: any) {
   dialogVisible.value = true
   isNewRef.value = isNew
@@ -22,14 +37,17 @@ function setModalVisible(isNew: boolean = true, itemData?: any) {
     editData.value = null
   }
 }
-const formData = reactive({
-  name: '',
-  parentId: '',
-  leader: '',
-})
+// 遍历将formData的属性给initalData
+const initialData: any = {}
+for (const item of props.modalConfig.formItems) {
+  initialData[item.prop] = item.initialForm ?? ''
+}
+const formData = reactive<any>(initialData)
 const isNewRef = ref(true)
+
 defineExpose({ setModalVisible })
 const editData = ref()
+// 获取roles、department的数据
 const mainStore = useMainStore()
 const { entireDepartments } = storeToRefs(mainStore)
 
@@ -49,11 +67,15 @@ function HandleConfirmClick() {
 
 <template>
   <div class="user-modal">
-    <el-dialog v-model="dialogVisible" :title="isNewRef ? '新增部门' : '编辑部门'" width="30%" center>
+    <el-dialog v-model="dialogVisible" :title="isNewRef ? modalConfig.header.newTitle : modalConfig.header.editTitle"
+      width="30%" center>
       <el-form :model="formData" label-width="100px">
-        <el-form-item label="部门名称:" prop="name">
-          <el-input v-model="formData.name" placeholder="请输入部门名称" style="width: 300px;" />
-        </el-form-item>
+        <template v-for="item in modalConfig.formItems" :key="item.prop">
+          <el-form-item :label="item.label" :prop="item.name">
+            <el-input v-model="formData[item.prop]" placeholder="请输入部门名称" style="width: 300px;" />
+          </el-form-item>
+        </template>
+
         <el-form-item label="上级部门:" prop="parentId">
           <el-select v-model="formData.parentId" placeholder="请选择上级部门" style="width: 300px;">
             <template v-for="item in entireDepartments" :key="item.id">
@@ -61,9 +83,7 @@ function HandleConfirmClick() {
             </template>
           </el-select>
         </el-form-item>
-        <el-form-item label="领导名称:" prop="leader">
-          <el-input v-model="formData.leader" placeholder="请输入领导名称" style="width: 300px;" />
-        </el-form-item>
+
       </el-form>
       <template #footer>
         <span class="dialog-footer">
