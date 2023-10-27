@@ -3,15 +3,15 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { formatUTC } from '@/utils/format'
 import useSystemStore from '@/store/main/system/system'
-import contentonfig from '@/views/main/system/department/config/content.config'
 
 interface IProps {
   contentConfig: {
     header?: {
       title?: string
       btnTitle?: string
+    },
+    propsList: any[]
 
-    }
   }
 }
 const props = defineProps<IProps>()
@@ -69,29 +69,30 @@ function HandleEditClick(itemData: any) {
     </div>
     <div class="table">
       <el-table :data="pageList" style="width: 100%" border>
-        <el-table-column type="selection" width="55" />
-        <el-table-column label="序号" type="index" width="55" />
+        <template v-for="item in contentConfig.propsList" :key="item.prop">
+          <template v-if="item.type === 'timer'">
+            <el-table-column v-bind="item">
+              <template #default="scoped">
+                {{ formatUTC(scoped.row[item.prop]) }}
+              </template>
+            </el-table-column>
+          </template>
+          <template v-else-if="item.type === 'handler'">
+            <!-- 新增、删除操作 -->
+            <el-table-column v-bind="item" align="center">
+              <template #default="scoped">
+                <el-button type="primary" text icon="Edit" @click="HandleEditClick(scoped.row)">编辑</el-button>
+                <el-button type="danger" text icon="Delete" @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
+              </template>
+            </el-table-column>
+          </template>
+          <template v-else>
+            <el-table-column v-bind="item" align="center" />
+          </template>
 
-        <el-table-column prop="name" label="部门名称" width="180" align="center" />
-        <el-table-column prop="leader" label="部门领导" width="180" align="center" />
-        <el-table-column prop="parentId" label="上级部门" width="180" align="center" />
-        <el-table-column prop="createAt" label="创建时间" align="center">
-          <template #default="scoped">
-            {{ formatUTC(scoped.row.createAt) }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="updateAt" label="更新事件" align="center">
-          <template #default="scoped">
-            {{ formatUTC(scoped.row.updateAt) }}
-          </template>
-        </el-table-column>
-        <!-- 新增、删除操作 -->
-        <el-table-column label="操作" width="260" align="center">
-          <template #default="scoped">
-            <el-button type="primary" text icon="Edit" @click="HandleEditClick(scoped.row)">编辑</el-button>
-            <el-button type="danger" text icon="Delete" @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
-          </template>
-        </el-table-column>
+        </template>
+
+
 
       </el-table>
     </div>
