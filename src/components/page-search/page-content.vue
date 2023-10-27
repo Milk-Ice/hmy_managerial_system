@@ -6,6 +6,7 @@ import useSystemStore from '@/store/main/system/system'
 
 interface IProps {
   contentConfig: {
+    pageName: string
     header?: {
       title?: string
       btnTitle?: string
@@ -40,14 +41,14 @@ function fetchPageListData(formData: any = {}) {
   const queryInfo = { ...pageInfo, ...formData }
   // console.log('请求参数', queryInfo)
   // 发送网络请求
-  systemStore.postPageListAction('department', queryInfo)
+  systemStore.postPageListAction(props.contentConfig.pageName, queryInfo)
 }
 defineExpose({ fetchPageListData })
 fetchPageListData()
 
 // 删除操作
 function HandleDeleteClick(id: number) {
-  systemStore.deletePageByIdAction('department', id)
+  systemStore.deletePageByIdAction(props.contentConfig.pageName, id)
   fetchPageListData()
 }
 const emit = defineEmits(['newClick', 'editClick'])
