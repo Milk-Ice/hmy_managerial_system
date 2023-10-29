@@ -11,7 +11,8 @@ interface IProps {
       title?: string
       btnTitle?: string
     },
-    propsList: any[]
+    propsList: any[],
+    childrenTree?: any
 
   }
 }
@@ -69,7 +70,7 @@ function HandleEditClick(itemData: any) {
       <el-button type="primary" @click="HandleAddClick">{{ contentConfig?.header?.btnTitle ?? '新建数据' }}</el-button>
     </div>
     <div class="table">
-      <el-table :data="pageList" style="width: 100%" border>
+      <el-table :data="pageList" style="width: 100%" row-key="id" border>
         <template v-for="item in contentConfig.propsList" :key="item.prop">
           <template v-if="item.type === 'timer'">
             <el-table-column v-bind="item">
