@@ -10,3 +10,9 @@ export function getEntireDepartment() {
     url: '/department/list'
   })
 }
+// 获取全部菜单数据
+export function getEntireMenuList() {
+  return hmyRequest.post({
+    url: '/menu/list'
+  })
+}
