@@ -80,6 +80,10 @@ function HandleConfirmClick() {
                 </template>
               </el-select>
             </template>
+            <template v-if="item.type === 'custom'">
+              <!-- 动态插槽，根据 item.slotName 的值插入不同的自定义内容 -->
+              <slot :name="item.slotName"></slot>
+            </template>
           </el-form-item>
         </template>
       </el-form>

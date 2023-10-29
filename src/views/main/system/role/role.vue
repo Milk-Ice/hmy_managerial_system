@@ -4,7 +4,10 @@
       @query-click="HandleQueryClick" />
     <page-content ref="contentRef" :content-config="contentConfig" @edit-click="HandleEditClick"
       @new-click="HandleNewClick" />
-    <page-modal :modal-config="modalConfig" ref="modalRef" />
+    <page-modal :modal-config="modalConfig" ref="modalRef">
+      <!-- 具名插槽，命名为 "menulist" -->
+      <template #menulist><span>菜单列表</span></template>
+    </page-modal>
   </div>
 </template>
 
