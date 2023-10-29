@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
-// import DepartmentSearch from '@/views/main/system/department/c-cpns/department-search.vue'
-import DepartmentSearch from '@/components/page-search/page-search.vue'
+import DepartmentSearch from '@/views/main/system/department/c-cpns/department-search.vue'
+// import DepartmentSearch from '@/components/page-search/page-search.vue'
 import DepartmentContent from '@/views/main/system/department/c-cpns/department-content.vue'
 import DepartmentModal from '@/views/main/system/department/c-cpns/department-modal.vue'
 

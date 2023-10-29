@@ -13,7 +13,7 @@ function loadLocalRoutes() {
   const files = import.meta.glob('../router/main/**/*.ts', { eager: true })//拿到的是对象类型
   // console.log(files)
   for (const key in files) {
-    const module = files[key]
+    const module: any = files[key]
     // console.log(module.default)
     localRoute.push(module.default)
   }

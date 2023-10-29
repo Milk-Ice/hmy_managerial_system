@@ -30,6 +30,7 @@ class HMYRequest {
 
     // 针对特定的HMYRequest实例添加拦截器
     this.instance.interceptors.request.use(
+      // @ts-ignore
       config.interceptors?.requestSuccessFn,
       config.interceptors?.requestFailureFn
     )
