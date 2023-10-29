@@ -31,13 +31,13 @@ const useSystemStore = defineStore('system', {
     // 创建新的user
     async newUserDataAction(userInfo: any) {
       const userInfoResult = await newUserData(userInfo)
-      // console.log(userInfoResult)
+      console.log(userInfoResult)
       this.postUserListAction({ offset: 0, size: 10 })
     },
     // 编辑操作
     async editUserDataAction(id: number, userInfo: any) {
       const editUserInfoResult = editUserData(id, userInfo)
-      // console.log(editUserInfoResult)
+      console.log(editUserInfoResult)
       this.postUserListAction({ offset: 0, size: 10 })
     },
     // 针对页面的网络请求，增删改查
@@ -51,20 +51,20 @@ const useSystemStore = defineStore('system', {
     // 删除
     async deletePageByIdAction(pageName: string, id: number) {
       const deleteResult = await deletePageListData(pageName, id)
-
+      console.log(deleteResult)
       this.postPageListAction(pageName, { offset: 0, size: 10 })
     },
     // 新增
     async newPageDataAction(pageName: string, pageInfo: any) {
       const pageDataResult = await newPageData('department', pageInfo)
-      // console.log(pageDataResult)
+      console.log(pageDataResult)
 
       this.postPageListAction(pageName, { offset: 0, size: 10 })
     },
     // 编辑
     async editPageDataAction(pageName: any, id: number, pageInfo: any) {
       const editPageInfoResult = editPageData(pageName, id, pageInfo)
-      // console.log(editUserInfoResult)
+      console.log(editPageInfoResult)
       this.postPageListAction(pageName, { offset: 0, size: 10 })
     },
   }
