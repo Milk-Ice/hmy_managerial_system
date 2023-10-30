@@ -16,7 +16,7 @@ interface ILoginState {
   token: string
   userInfo: any
   userMenus: any,
-  permisson: string[]
+  permissions: string[]
 }
 
 const useLoginStore = defineStore('login', {
@@ -25,7 +25,7 @@ const useLoginStore = defineStore('login', {
     token: '',
     userInfo: {},
     userMenus: [],
-    permisson: []
+    permissions: []
 
   }),
   actions: {
@@ -56,7 +56,7 @@ const useLoginStore = defineStore('login', {
 
       // 获取登陆用户的所有按钮权限
       const permisson = mapMenuListToPermisson(userMenus)
-      this.permisson = permisson
+      this.permissions = permisson
 
       const routes = mapMenuToRoute(userMenus)
       routes.forEach((route) => router.addRoute('main', route))
@@ -80,7 +80,7 @@ const useLoginStore = defineStore('login', {
 
         // 获取登陆用户的所有按钮权限
         const permisson = mapMenuListToPermisson(userMenus)
-        this.permisson = permisson
+        this.permissions = permisson
 
         // 动态添加路由
         const routes = mapMenuToRoute(userMenus)

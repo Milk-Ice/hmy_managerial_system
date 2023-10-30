@@ -1,9 +1,11 @@
 <script setup lang='ts'>
-import type { ElForm } from 'element-plus';
-import { reactive, ref } from 'vue';
+import type { ElForm } from 'element-plus'
+import { reactive, ref } from 'vue'
+import userPermisson from '@/hooks/usePermission'
 
 interface IProps {
   searchConfig: {
+    pageName: string
     formItems: any[]
   }
 }
@@ -30,11 +32,14 @@ function handleQueryClick() {
   emit('queryClick', searchForm)
   // console.log('Search-Click')
 }
+
+const isQuery = userPermisson(`${props.searchConfig.pageName}department:query`)
+
 const formRef = ref<InstanceType<typeof ElForm>>()
 </script>
 
 <template>
-  <div class="user-search">
+  <div class="user-search" v-if="isQuery">
     <el-form :model="searchForm" ref="formRef" label-width="80px">
       <el-row :gutter="20">
         <template v-for="item in searchConfig.formItems" :key="item.props">

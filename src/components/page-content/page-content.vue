@@ -3,8 +3,7 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { formatUTC } from '@/utils/format'
 import useSystemStore from '@/store/main/system/system'
-import useLoginStore from '@/store/login/login';
-
+import userPermisson from '@/hooks/usePermission'
 interface IProps {
   contentConfig: {
     pageName: string
@@ -62,13 +61,10 @@ function HandleEditClick(itemData: any) {
   // console.log('edit', itemData)
   emit('editClick', itemData)
 }
-const loginStore = useLoginStore()
-const { permisson } = loginStore
 // 获取是否有增删改查的权限
-const isCreate = permisson.find(item => item.includes(`${props.contentConfig.pageName}department:create`))
-const isDelete = permisson.find(item => item.includes(`${props.contentConfig.pageName}department:delete`))
-const isEdit = permisson.find(item => item.includes(`${props.contentConfig.pageName}:uodate`))
-const isQuery = permisson.find(item => item.includes(`${props.contentConfig.pageName}department:query`))
+const isCreate = userPermisson(`${props.contentConfig.pageName}:create`)
+const isDelete = userPermisson(`${props.contentConfig.pageName}:delete`)
+const isEdit = userPermisson(`${props.contentConfig.pageName}:update`)
 </script>
 
 <template>
