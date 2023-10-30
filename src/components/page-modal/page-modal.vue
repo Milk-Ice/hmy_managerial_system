@@ -10,8 +10,9 @@ interface IModalProps {
       newTitle: string,
       editTitle: string
     },
-    formItems: any[]
+    formItems: any[],
   }
+  otherInfo?: any
 }
 // 接收父组件传来的数据
 const props = defineProps<IModalProps>()
@@ -52,12 +53,17 @@ const editData = ref()
 //点击确认的逻辑
 function HandleConfirmClick() {
   dialogVisible.value = false
+  let infoData = formData
+  if (props.otherInfo) {
+    infoData = { ...infoData, ...props.otherInfo }
+  }
+
   // 新建用户
   if (isNewRef.value) {
     // 创建新的用户
-    systemStore.newPageDataAction(props.modalConfig.pageName, formData)
+    systemStore.newPageDataAction(props.modalConfig.pageName, infoData)
   } else {//编辑用户
-    systemStore.editPageDataAction(props.modalConfig.pageName, editData.value.id, formData)
+    systemStore.editPageDataAction(props.modalConfig.pageName, editData.value.id, infoData)
   }
 
 }
