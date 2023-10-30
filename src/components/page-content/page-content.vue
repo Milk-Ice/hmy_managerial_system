@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { formatUTC } from '@/utils/format'
 import useSystemStore from '@/store/main/system/system'
+import useLoginStore from '@/store/login/login';
 
 interface IProps {
   contentConfig: {
@@ -61,13 +62,22 @@ function HandleEditClick(itemData: any) {
   // console.log('edit', itemData)
   emit('editClick', itemData)
 }
+const loginStore = useLoginStore()
+const { permisson } = loginStore
+// 获取是否有增删改查的权限
+const isCreate = permisson.find(item => item.includes(`${props.contentConfig.pageName}department:create`))
+const isDelete = permisson.find(item => item.includes(`${props.contentConfig.pageName}department:delete`))
+const isEdit = permisson.find(item => item.includes(`${props.contentConfig.pageName}:uodate`))
+const isQuery = permisson.find(item => item.includes(`${props.contentConfig.pageName}department:query`))
 </script>
 
 <template>
   <div class="content">
     <div class="header">
       <h3 class="title">{{ contentConfig?.header?.title ?? '数据列表' }}</h3>
-      <el-button type="primary" @click="HandleAddClick">{{ contentConfig?.header?.btnTitle ?? '新建数据' }}</el-button>
+      <!-- 增加数据 -->
+      <el-button v-if="isCreate" type="primary"
+        @click="HandleAddClick">{{ contentConfig?.header?.btnTitle ?? '新建数据' }}</el-button>
     </div>
     <div class="table">
       <el-table :data="pageList" style="width: 100%" row-key="id" border>
@@ -80,11 +90,13 @@ function HandleEditClick(itemData: any) {
             </el-table-column>
           </template>
           <template v-else-if="item.type === 'handler'">
-            <!-- 新增、删除操作 -->
+            <!-- 编辑、删除操作 -->
             <el-table-column v-bind="item" align="center">
               <template #default="scoped">
-                <el-button type="primary" text icon="Edit" @click="HandleEditClick(scoped.row)">编辑</el-button>
-                <el-button type="danger" text icon="Delete" @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
+                <el-button v-if="isEdit" type="primary" text icon="Edit"
+                  @click="HandleEditClick(scoped.row)">编辑</el-button>
+                <el-button v-if="isDelete" type="danger" text icon="Delete"
+                  @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
               </template>
             </el-table-column>
           </template>
