@@ -33,7 +33,7 @@ function handleQueryClick() {
   // console.log('Search-Click')
 }
 
-const isQuery = userPermisson(`${props.searchConfig.pageName}department:query`)
+const isQuery = userPermisson(`${props.searchConfig.pageName}:query`)
 
 const formRef = ref<InstanceType<typeof ElForm>>()
 </script>

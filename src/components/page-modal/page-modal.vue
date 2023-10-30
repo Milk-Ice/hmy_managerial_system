@@ -24,16 +24,17 @@ const systemStore = useSystemStore()
 function setModalVisible(isNew: boolean = true, itemData?: any) {
   dialogVisible.value = true
   isNewRef.value = isNew
-  // 编辑操作
   if (!isNew && itemData) {
+    // 编辑数据
     for (const key in formData) {
       formData[key] = itemData[key]
     }
     editData.value = itemData
   } else {
-    // 新增操作
+    // 新建数据
     for (const key in formData) {
-      formData[key] = ''
+      const item = props.modalConfig.formItems.find((item) => item.prop === key)
+      formData[key] = item ? item.initialValue : ''
     }
     editData.value = null
   }
@@ -50,22 +51,27 @@ defineExpose({ setModalVisible })
 const editData = ref()
 // 获取roles、department的数据
 
-//点击确认的逻辑
-function HandleConfirmClick() {
+// 3.点击了确定的逻辑
+function handleConfirmClick() {
   dialogVisible.value = false
+
   let infoData = formData
   if (props.otherInfo) {
     infoData = { ...infoData, ...props.otherInfo }
   }
 
-  // 新建用户
-  if (isNewRef.value) {
-    // 创建新的用户
-    systemStore.newPageDataAction(props.modalConfig.pageName, infoData)
-  } else {//编辑用户
-    systemStore.editPageDataAction(props.modalConfig.pageName, editData.value.id, infoData)
-  }
+  if (!isNewRef.value && editData.value) {
+    // 编辑用户的数据
+    systemStore.editPageDataAction(
+      props.modalConfig.pageName,
+      editData.value.id,
+      infoData
+    )
 
+  } else {
+    // 创建新的部门
+    systemStore.newPageDataAction(props.modalConfig.pageName, infoData)
+  }
 }
 </script>
 
@@ -80,7 +86,7 @@ function HandleConfirmClick() {
               <el-input v-model="formData[item.prop]" :placeholder="item.placeholder" style="width: 300px;" />
             </template>
             <template v-if="item.type === 'select'">
-              <el-select v-model="formData[item.props]" :placeholder="item.placeholder" style="width: 300px;">
+              <el-select v-model="formData[item.prop]" :placeholder="item.placeholder" style="width: 300px;">
                 <template v-for="option in item.options" :key="option.value">
                   <el-option :label="option.label" :value="option.value"></el-option>
                 </template>
@@ -96,7 +102,7 @@ function HandleConfirmClick() {
 
       <template #footer>
         <span class="dialog-footer">
-          <el-button type="primary" @click="HandleConfirmClick">
+          <el-button type="primary" @click="handleConfirmClick">
             确认
           </el-button>
           <el-button @click="dialogVisible = false">取消</el-button>

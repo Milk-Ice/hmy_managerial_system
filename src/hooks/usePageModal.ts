@@ -10,7 +10,7 @@ function usePageModal(editCallBack?: EditFnType) {
   // 新增
   function HandleNewClick(formData: any) {
     modalRef.value?.setModalVisible(formData)
-
+    // console.log('Hook的formData', formData)
   }
   // 编辑
   function HandleEditClick(itemData: any) {

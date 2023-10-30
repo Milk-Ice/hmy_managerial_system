@@ -12,7 +12,7 @@ const useMainStore = defineStore('mian', {
     entireMenus: []
   }),
   actions: {
-    async fetchEntireRoleAction() {
+    async fetchEntireDataAction() {
       const rolesResult = await getEntireRoles()
       const departmentResult = await getEntireDepartment()
       const entireMenuResult = await getEntireMenuList()

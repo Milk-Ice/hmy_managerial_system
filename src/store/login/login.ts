@@ -52,7 +52,7 @@ const useLoginStore = defineStore('login', {
 
       // 请求所有的roles/department数据
       const mainStore = useMainStore()
-      mainStore.fetchEntireRoleAction()
+      mainStore.fetchEntireDataAction()
 
       // 获取登陆用户的所有按钮权限
       const permisson = mapMenuListToPermisson(userMenus)
@@ -76,7 +76,7 @@ const useLoginStore = defineStore('login', {
 
         // 请求所有的roles/department数据
         const mainStore = useMainStore()
-        mainStore.fetchEntireRoleAction()
+        mainStore.fetchEntireDataAction()
 
         // 获取登陆用户的所有按钮权限
         const permisson = mapMenuListToPermisson(userMenus)

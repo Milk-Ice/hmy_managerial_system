@@ -33,7 +33,7 @@ function handleSizeChange() {
 function handleCurrentChange() {
   fetchPageListData()
 }
-// 封装发送请求的函数
+// 封装发送页面改变请求的函数
 function fetchPageListData(formData: any = {}) {
   // 获取size，offset
   const size = pageSize.value
@@ -44,6 +44,7 @@ function fetchPageListData(formData: any = {}) {
   // 发送网络请求
   systemStore.postPageListAction(props.contentConfig.pageName, queryInfo)
 }
+
 defineExpose({ fetchPageListData })
 fetchPageListData()
 

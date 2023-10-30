@@ -1,23 +1,27 @@
 
 <script setup lang='ts'>
-import router from "@/router";
-import { computed } from "vue";
-import useLoginStore from "@/store/login/login";
-import { mapPathToMenu } from "@/utils/map_menus";
-import { useRoute } from "vue-router";
+import { computed } from "vue"
+import useLoginStore from "@/store/login/login"
+import { mapPathToMenu } from "@/utils/map_menus"
+import { useRoute, useRouter } from "vue-router"
 const loginStore = useLoginStore()
 const userMenu = loginStore.userMenus
 
+// 0.定义props
 defineProps({
   isFold: {
     Boolean,
     default: false
   }
 })
+// 1.获取动态的菜单
+const router = useRouter()
 function handleItemClick(item: any) {
   const url = item.url
   router.push(url)
 }
+
+// 3.ElMenu的默认菜单
 const route = useRoute()
 const defaultActive = computed(() => {
   const pathMenu = mapPathToMenu(route.path, userMenu)

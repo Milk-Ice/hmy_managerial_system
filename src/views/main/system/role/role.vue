@@ -31,7 +31,7 @@ function handleCheckClick(data1: any, data2: any) {
   const menulist = [...data2.checkedKeys, ...data2.checkedKeys]
   // console.log(menulist)
   otherInfo.value = { menulist }
-  // console.log(otherInfo)
+  // console.log(otherInfo) 拿到了
 }
 const treeRef = ref<InstanceType<typeof ElTree>>()
 // 定义一个回调函数，传给usePageModal（Hook函数）
@@ -39,6 +39,7 @@ function editCallBack(itemData: any) {
   // console.log('点击了编辑', itemData.menuList)
   // console.log(menuIds)
   nextTick(() => {
+    console.log({ ...itemData })
     const menuIds = mapMenuListToIds(itemData.menuList)
     treeRef.value?.setCheckedKeys(menuIds)
   })
