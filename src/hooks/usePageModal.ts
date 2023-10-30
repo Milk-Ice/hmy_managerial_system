@@ -58,4 +58,27 @@ export function mapMenuListToIds(menuList: any[]) {
   return ids
 }
 
+
+
+/**
+ * 从菜单映射到按钮的权限
+ *@param menuList 菜单的列表
+ @returns 权限的数据
+ */
+export function mapMenuListToPermisson(menuList: any) {
+  const permission: string[] = []
+
+  function recurseGetPermission(menu: any) {
+    for (const item of menu) {
+      if (item.type === 3) {
+        permission.push(item.permission)
+      } else {
+        recurseGetPermission(item.children ?? [])
+      }
+    }
+  }
+  recurseGetPermission(menuList)
+  return permission
+}
+
 export default usePageModal

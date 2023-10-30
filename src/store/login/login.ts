@@ -10,11 +10,13 @@ import router from '@/router'
 import { LOGIN_TOKEN } from '@/gobal/constants'
 import { mapMenuToRoute } from '@/utils/map_menus'
 import useMainStore from '../main/main'
+import { mapMenuListToPermisson } from '@/hooks/usePageModal'
 
 interface ILoginState {
   token: string
   userInfo: any
-  userMenus: any
+  userMenus: any,
+  permisson: string[]
 }
 
 const useLoginStore = defineStore('login', {
@@ -22,7 +24,9 @@ const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
     token: '',
     userInfo: {},
-    userMenus: []
+    userMenus: [],
+    permisson: []
+
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
@@ -50,6 +54,10 @@ const useLoginStore = defineStore('login', {
       const mainStore = useMainStore()
       mainStore.fetchEntireRoleAction()
 
+      // 获取登陆用户的所有按钮权限
+      const permisson = mapMenuListToPermisson(userMenus)
+      this.permisson = permisson
+
       const routes = mapMenuToRoute(userMenus)
       routes.forEach((route) => router.addRoute('main', route))
       // console.log(routes)
@@ -69,6 +77,10 @@ const useLoginStore = defineStore('login', {
         // 请求所有的roles/department数据
         const mainStore = useMainStore()
         mainStore.fetchEntireRoleAction()
+
+        // 获取登陆用户的所有按钮权限
+        const permisson = mapMenuListToPermisson(userMenus)
+        this.permisson = permisson
 
         // 动态添加路由
         const routes = mapMenuToRoute(userMenus)
