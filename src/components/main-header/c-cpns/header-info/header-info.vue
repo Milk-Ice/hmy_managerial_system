@@ -1,13 +1,16 @@
 <script setup lang='ts'>
-import { LOGIN_TOKEN } from '@/gobal/constants';
-import router from '@/router';
-import { localCache } from '@/utils/cache';
+import { LOGIN_TOKEN } from '@/gobal/constants'
+import router from '@/router'
+import useLoginStore from '@/store/login/login'
+import { localCache } from '@/utils/cache'
 
 function handleExitClick() {
   localCache.removeCache(LOGIN_TOKEN)
   router.push("/login")
 
 }
+const loginStore = useLoginStore()
+const { userInfo } = loginStore
 </script>
 
 <template>
@@ -31,7 +34,7 @@ function handleExitClick() {
         <span class="user-info">
           <el-avatar :size="30"
             src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202108%2F05%2F20210805211949_e77e4.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1700572330&t=57e06d29089830a97a93f9a67cc3044d" />
-          <span class="name">hmy</span>
+          <span class="name">{{ userInfo.name }}</span>
         </span>
         <el-icon class="el-icon--right">
           <arrow-down />

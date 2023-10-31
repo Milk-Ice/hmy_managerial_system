@@ -8,8 +8,8 @@ function usePageModal(editCallBack?: EditFnType) {
   const modalRef = ref<InstanceType<typeof PageModal>>()
 
   // 新增
-  function HandleNewClick(formData: any) {
-    modalRef.value?.setModalVisible(formData)
+  function HandleNewClick() {
+    modalRef.value?.setModalVisible()
     // console.log('Hook的formData', formData)
   }
   // 编辑
@@ -31,7 +31,7 @@ function usePageModal(editCallBack?: EditFnType) {
  * @param {any[]} menuList - 嵌套的菜单列表
  * @returns {number[]} - 包含所有菜单项的 ID 数组
  */
-export function mapMenuListToIds(menuList: any[]) {
+export function mapMenuListToIds(menuList: any[]): number[] {
   const ids: number[] = []
 
   /**
@@ -65,7 +65,7 @@ export function mapMenuListToIds(menuList: any[]) {
  *@param menuList 菜单的列表
  @returns 权限的数据
  */
-export function mapMenuListToPermisson(menuList: any) {
+export function mapMenuListToPermisson(menuList: any[]) {
   const permission: string[] = []
 
   function recurseGetPermission(menu: any) {
