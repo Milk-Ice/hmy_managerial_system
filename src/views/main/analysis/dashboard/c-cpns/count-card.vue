@@ -2,15 +2,15 @@
 interface IProps {
   title?: string
   tips?: string
-  number1?: string
-  number2?: string
+  number1?: number
+  number2?: number
   subtitle?: string
 }
 withDefaults(defineProps<IProps>(), {
   title: '商品总销量',
   tips: '所有商品总销量',
-  number1: '509899',
-  number2: '509899',
+  number1: 509899,
+  number2: 509899,
   subtitle: '商品总销量'
 })
 
