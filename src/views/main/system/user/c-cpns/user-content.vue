@@ -1,8 +1,9 @@
 <script setup lang='ts'>
-import useSystemStore from '@/store/main/system/system'
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
+import usePermissions from '@/hooks/usePermission'
+import useSystemStore from '@/store/main/system/system'
 // 1.发起action，请求userList的数据
 const systemStore = useSystemStore()
 
@@ -21,6 +22,7 @@ function handleCurrentChange() {
 }
 // 封装发送请求的函数
 function fetchUserListData(formData: any = {}) {
+  if (!isQuery) return
   // 获取size，offset
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
@@ -48,13 +50,19 @@ function HandleEditClick(itemData: any) {
   // console.log('edit', itemData)
   emit('editClick', itemData)
 }
+// 用户的权限判断
+const isCreate = usePermissions('users:create')
+const isDelete = usePermissions('users:delete')
+const isUpdate = usePermissions('users:edit')
+const isQuery = usePermissions('users:query')
+
 </script>
 
 <template>
   <div class="content">
     <div class="header">
       <h3 class="title">用户列表</h3>
-      <el-button type="primary" @click="HandleAddClick">新建用户</el-button>
+      <el-button v-if="isCreate" type="primary" @click="HandleAddClick">新建用户</el-button>
     </div>
     <div class="table">
       <el-table :data="usersList" style="width: 100%" border>
@@ -84,8 +92,9 @@ function HandleEditClick(itemData: any) {
         <!-- 新增、删除操作 -->
         <el-table-column label="操作" width="260" align="center">
           <template #default="scoped">
-            <el-button type="primary" text icon="Edit" @click="HandleEditClick(scoped.row)">编辑</el-button>
-            <el-button type="danger" text icon="Delete" @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
+            <el-button v-if="isUpdate" type="primary" text icon="Edit" @click="HandleEditClick(scoped.row)">编辑</el-button>
+            <el-button v-if="isDelete" type="danger" text icon="Delete"
+              @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
           </template>
         </el-table-column>
 
