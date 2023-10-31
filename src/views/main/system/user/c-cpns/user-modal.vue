@@ -5,23 +5,34 @@ import useMainStore from '@/store/main/main'
 import useSystemStore from '@/store/main/system/system'
 const dialogVisible = ref(false)
 const systemStore = useSystemStore()
+/**
+ * 控制弹窗的显示和数据的回显，用于执行新建或编辑操作。
+ *
+ * @param {boolean} isNew - 是否执行新建操作（默认为 true）
+ * @param {any} itemData - 编辑操作时需要回显的数据（可选）
+ */
+const editData = ref(); // 用于维护编辑数据，以便在编辑操作时回显已有数据
+const isNewRef = ref(true); // 用于标记当前操作是否是新建操作，默认为 true
+
 function setModalVisible(isNew: boolean = true, itemData?: any) {
-  dialogVisible.value = true
-  isNewRef.value = isNew
-  // 编辑操作
+  dialogVisible.value = true; // 打开弹窗
+  isNewRef.value = isNew; // 标记当前操作是新建还是编辑
+
   if (!isNew && itemData) {
+    // 编辑操作
     for (const key in formData) {
-      formData[key] = itemData[key]
+      formData[key] = itemData[key]; // 将传入的数据填充到表单中
     }
-    editData.value = itemData
+    editData.value = itemData; // 维护编辑数据以便回显
   } else {
     // 新增操作
     for (const key in formData) {
-      formData[key] = ''
+      formData[key] = ''; // 清空表单数据
     }
-    editData.value = null
+    editData.value = null; // 清空编辑数据
   }
 }
+
 const formData = reactive({
   name: '',
   password: '',
@@ -30,9 +41,11 @@ const formData = reactive({
   departmentId: '',
   roleId: ''
 })
-const isNewRef = ref(true)
-defineExpose({ setModalVisible })
-const editData = ref()
+
+defineExpose({ setModalVisible }); // 暴露 setModalVisible 函数，使其在父组件中可用
+
+
+// 1.获取角色，部门数据
 const mainStore = useMainStore()
 const { entireRoles, entireDepartments } = storeToRefs(mainStore)
 

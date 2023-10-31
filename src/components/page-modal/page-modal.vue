@@ -2,6 +2,9 @@
 import { ref, reactive } from 'vue'
 import useSystemStore from '@/store/main/system/system'
 
+// 0.接收父组件传来的数据
+const props = defineProps<IModalProps>()
+
 // 定义父组件传来的类型
 interface IModalProps {
   modalConfig: {
@@ -14,13 +17,26 @@ interface IModalProps {
   }
   otherInfo?: any
 }
-// 接收父组件传来的数据
-const props = defineProps<IModalProps>()
-// console.log(props.modalConfig)
-// 控制Modal的显示和隐藏
-const dialogVisible = ref(false)
+
+// 1.定义内部的属性
+const dialogVisible = ref(false)// 控制Modal的显示和隐藏
+const initialData: any = {} // 使用表单项的初始值，如果不存在则使用空字符串
+
+// 遍历父组件传递的表单项配置，将每个表单项的 prop 作为键，初始值作为值存储在 initialData 中
+for (const item of props.modalConfig.formItems) {
+  initialData[item.prop] = item.initialValue ?? ''
+}
+
+const formData = reactive<any>(initialData) // 创建响应式的表单数据对象，用于双向绑定表单数据
+
+const isNewRef = ref(true) // 用于标记当前操作是否是新建操作，默认为 true
+
+const editData = ref() // 用于维护编辑数据，以便在编辑操作时回显已有数据
+
+// 3.获取roles、department的数据
 const systemStore = useSystemStore()
-// 弹出modal的逻辑
+
+// 2.定义设置dialogVisible方法
 function setModalVisible(isNew: boolean = true, itemData?: any) {
   dialogVisible.value = true
   isNewRef.value = isNew
@@ -39,17 +55,6 @@ function setModalVisible(isNew: boolean = true, itemData?: any) {
     editData.value = null
   }
 }
-// 遍历将formData的属性给initalData
-const initialData: any = {}
-for (const item of props.modalConfig.formItems) {
-  initialData[item.prop] = item.initialValue ?? ''
-}
-const formData = reactive<any>(initialData)
-const isNewRef = ref(true)
-
-defineExpose({ setModalVisible })
-const editData = ref()
-// 获取roles、department的数据
 
 // 3.点击了确定的逻辑
 function handleConfirmClick() {
@@ -74,6 +79,9 @@ function handleConfirmClick() {
     systemStore.newPageDataAction(props.modalConfig.pageName, infoData)
   }
 }
+// 暴露的属性和方法
+defineExpose({ setModalVisible })
+
 </script>
 
 <template>

@@ -53,7 +53,7 @@ function HandleAddClick() {
 }
 // 编辑操作
 function HandleEditClick(itemData: any) {
-  // console.log('edit', itemData)
+  console.log('edit', itemData)
   emit('editClick', itemData)
 }
 
