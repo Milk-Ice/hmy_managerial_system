@@ -17,7 +17,7 @@ import type { ElTree } from 'element-plus/lib/components/index.js'
 // 点击search、content的逻辑
 const { contentRef, HandleResetClick, HandleQueryClick } = usePageContent()
 // 点击content、modal的逻辑
-const { modalRef, HandleNewClick, HandleEditClick } = usePageModal(editCallBack)
+const { modalRef, HandleNewClick, HandleEditClick } = usePageModal(newCallBack, editCallBack)
 
 // 获取菜单
 const mainStore = useMainStore()
@@ -42,6 +42,13 @@ function editCallBack(itemData: any) {
     console.log({ ...itemData })
     const menuIds = mapMenuListToIds(itemData.menuList)
     treeRef.value?.setCheckedKeys(menuIds)
+  })
+}
+//
+function newCallBack() {
+  nextTick(() => {
+    // console.log({ ...itemData })
+    treeRef.value?.setCheckedKeys([])
   })
 }
 </script>

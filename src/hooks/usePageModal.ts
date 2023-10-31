@@ -2,15 +2,16 @@ import { ref } from "vue"
 import PageModal from '@/components/page-modal/page-modal.vue'
 
 // 回调函数的类型
-type EditFnType = (data: any) => void
+type CallbackFnType = (data?: any) => void
 
-function usePageModal(editCallBack?: EditFnType) {
+function usePageModal(newCallBack?: CallbackFnType, editCallBack?: CallbackFnType) {
   const modalRef = ref<InstanceType<typeof PageModal>>()
 
   // 新增
   function HandleNewClick() {
     modalRef.value?.setModalVisible()
     // console.log('Hook的formData', formData)
+    if (newCallBack) newCallBack()
   }
   // 编辑
   function HandleEditClick(itemData: any) {
