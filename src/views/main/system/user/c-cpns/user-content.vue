@@ -7,6 +7,12 @@ import useSystemStore from '@/store/main/system/system'
 // 1.发起action，请求userList的数据
 const systemStore = useSystemStore()
 
+// 用户的权限判断
+const isCreate = usePermissions('users:create')
+const isDelete = usePermissions('users:delete')
+const isUpdate = usePermissions('users:edit')
+const isQuery = usePermissions('users:query')
+
 // 2.获取userList数据进行展示（转化为响应数据）
 const { usersList, userTotalCount } = storeToRefs(systemStore)
 const currentPage = ref(1)
@@ -50,11 +56,6 @@ function HandleEditClick(itemData: any) {
   // console.log('edit', itemData)
   emit('editClick', itemData)
 }
-// 用户的权限判断
-const isCreate = usePermissions('users:create')
-const isDelete = usePermissions('users:delete')
-const isUpdate = usePermissions('users:edit')
-const isQuery = usePermissions('users:query')
 
 </script>
 

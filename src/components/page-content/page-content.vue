@@ -25,6 +25,14 @@ const { pageList, pageToTalCount } = storeToRefs(systemStore)
 const currentPage = ref(1)
 const pageSize = ref(10)
 
+//监听systemStore中的action被执行
+systemStore.$onAction(({ name, after }) => {
+  after(() => {
+    if (name === 'deletePageByIdAction' || name === 'editPageDataAction' || name === 'newPageDataAction') {
+      currentPage.value = 1
+    }
+  })
+})
 // 每一页展示数据发生改变
 function handleSizeChange() {
   fetchPageListData()
