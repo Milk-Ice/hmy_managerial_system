@@ -28,9 +28,9 @@ const otherInfo = ref({})
 function handleCheckClick(data1: any, data2: any) {
   // console.log('handleELTree')
   // console.log({ ...data1.checkedNodes, ...data2.checkedNodes })
-  const menulist = [...data2.checkedKeys, ...data2.checkedKeys]
+  const menuList = [...data2.checkedKeys, ...data2.checkedKeys]
   // console.log(menulist)
-  otherInfo.value = { menulist }
+  otherInfo.value = { menuList }
   // console.log(otherInfo) 拿到了
 }
 const treeRef = ref<InstanceType<typeof ElTree>>()

@@ -56,8 +56,16 @@ function handleConfirmClick() {
   dialogVisible.value = false
 
   let infoData = formData
+
   if (props.otherInfo) {
     infoData = { ...infoData, ...props.otherInfo }
+    // 过滤掉 "undefined" 属性
+    infoData = Object.keys(infoData).reduce((result, key) => {
+      if (key !== 'undefined') {
+        result[key] = infoData[key]
+      }
+      return result
+    }, {})
   }
 
   if (!isNewRef.value && editData.value) {
@@ -67,10 +75,12 @@ function handleConfirmClick() {
       editData.value.id,
       infoData
     )
+    console.log({ ...infoData })
 
   } else {
     // 创建新的部门
     systemStore.newPageDataAction(props.modalConfig.pageName, infoData)
+    console.log(infoData)
   }
 }
 </script>
