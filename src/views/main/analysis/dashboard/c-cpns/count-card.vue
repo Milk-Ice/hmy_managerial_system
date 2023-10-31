@@ -1,19 +1,34 @@
 <script setup lang='ts'>
+import { ref, onMounted } from 'vue'
+import { CountUp } from 'countup.js'
 interface IProps {
+  amount?: string
   title?: string
   tips?: string
   number1?: number
   number2?: number
   subtitle?: string
 }
-withDefaults(defineProps<IProps>(), {
+const props = withDefaults(defineProps<IProps>(), {
   title: '商品总销量',
   tips: '所有商品总销量',
   number1: 509899,
   number2: 509899,
   subtitle: '商品总销量'
 })
-
+// 创建countup实例对象
+const count1Ref = ref<HTMLElement>()
+const count2Ref = ref<HTMLElement>()
+const countOption = {
+  prefix: props.amount === 'saleroom' ? '￥' : ''
+}
+// 要等Dom渲染完成才可以执行操作
+onMounted(() => {
+  const countup1 = new CountUp(count1Ref.value!, props.number1, countOption)
+  const countup2 = new CountUp(count1Ref.value!, props.number2, countOption)
+  countup1.start()
+  countup2.start()
+})
 </script>
 
 <template>
@@ -27,11 +42,11 @@ withDefaults(defineProps<IProps>(), {
       </el-tooltip>
     </div>
     <div class="content">
-      <span>{{ number1 }}</span>
+      <span ref="count1Ref">{{ number1 }}</span>
     </div>
     <div class="footer">
       <span>{{ subtitle }}:&nbsp;</span>
-      <span>{{ number2 }}</span>
+      <span ref="count2Ref">{{ number2 }}</span>
     </div>
   </div>
 </template>
