@@ -9,10 +9,10 @@ import contentConfig from '../role/config/content.config'
 import modalConfig from '../role/config/modal.config'
 import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
-import { mapMenuListToIds } from '@/hooks/usePageModal'
 import useMainStore from '@/store/main/main'
 import { storeToRefs } from 'pinia'
 import type { ElTree } from 'element-plus/lib/components/index.js'
+import { mapMenuListToIds } from '@/utils/map_menus'
 
 // 点击search、content的逻辑
 const { contentRef, HandleResetClick, HandleQueryClick } = usePageContent()
@@ -22,14 +22,13 @@ const { modalRef, HandleNewClick, HandleEditClick } = usePageModal(newCallBack, 
 // 获取菜单
 const mainStore = useMainStore()
 const { entireMenus } = storeToRefs(mainStore)
+
 // 保存点击复选框的数据
 const otherInfo = ref({})
 // 点击复选框的逻辑
 function handleCheckClick(data1: any, data2: any) {
-  // console.log('handleELTree')
-  // console.log({ ...data1.checkedNodes, ...data2.checkedNodes })
-  const menuList = [...data2.checkedKeys, ...data2.checkedKeys]
-  // console.log(menulist)
+  const menuList = [...data2.checkedKeys, ...data2.halfCheckedKeys]
+  console.log(data2.checkedKeys)
   otherInfo.value = { menuList }
   // console.log(otherInfo) 拿到了
 }

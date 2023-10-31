@@ -80,3 +80,60 @@ export function mapPathToBreadcrumb(path: string, userMenus: any[]) {
   }
   return breadcrumb
 }
+
+
+/**
+ * 将嵌套的菜单列表映射为包含所有菜单项的 ID 数组。
+ *
+ * @param {any[]} menuList - 嵌套的菜单列表
+ * @returns {number[]} - 包含所有菜单项的 ID 数组
+ */
+export function mapMenuListToIds(menuList: any[]): number[] {
+  const ids: number[] = []
+
+  /**
+   * 递归遍历菜单列表并将每个叶子菜单项的 ID 添加到 ids 数组中。
+   *
+   * @param {any[]} menu - 当前的菜单列表
+   */
+  function recurseGetId(menu: any[]) {
+    for (const item of menu) {
+      if (item.children) {
+        // 继续递归处理子菜单
+        recurseGetId(item.children)
+      } else {
+        // 添加叶子菜单项的 ID 到数组
+        ids.push(item.id)
+      }
+    }
+  }
+
+  // 调用递归函数以开始遍历初始菜单列表
+  recurseGetId(menuList)
+  // console.log(ids)
+  // 返回包含所有菜单项的 ID 数组
+  return ids
+}
+
+
+
+/**
+ * 从菜单映射到按钮的权限
+ *@param menuList 菜单的列表
+ @returns 权限的数据
+ */
+export function mapMenuListToPermisson(menuList: any[]) {
+  const permission: string[] = []
+
+  function recurseGetPermission(menu: any) {
+    for (const item of menu) {
+      if (item.type === 3) {
+        permission.push(item.permission)
+      } else {
+        recurseGetPermission(item.children ?? [])
+      }
+    }
+  }
+  recurseGetPermission(menuList)
+  return permission
+}

@@ -10,7 +10,7 @@ const systemStore = useSystemStore()
 // 用户的权限判断
 const isCreate = usePermissions('users:create')
 const isDelete = usePermissions('users:delete')
-const isUpdate = usePermissions('users:edit')
+const isUpdate = usePermissions('users:update')
 const isQuery = usePermissions('users:query')
 
 // 2.获取userList数据进行展示（转化为响应数据）

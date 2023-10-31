@@ -8,9 +8,8 @@ import type { IAccount } from '@/types/login'
 import { localCache } from '@/utils/cache'
 import router from '@/router'
 import { LOGIN_TOKEN } from '@/gobal/constants'
-import { mapMenuToRoute } from '@/utils/map_menus'
+import { mapMenuListToPermisson, mapMenuToRoute } from '@/utils/map_menus'
 import useMainStore from '../main/main'
-import { mapMenuListToPermisson } from '@/hooks/usePageModal'
 
 interface ILoginState {
   token: string

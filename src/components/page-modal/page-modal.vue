@@ -56,17 +56,10 @@ function handleConfirmClick() {
   dialogVisible.value = false
 
   let infoData = formData
-
   if (props.otherInfo) {
     infoData = { ...infoData, ...props.otherInfo }
-    // 过滤掉 "undefined" 属性
-    infoData = Object.keys(infoData).reduce((result, key) => {
-      if (key !== 'undefined') {
-        result[key] = infoData[key]
-      }
-      return result
-    }, {})
   }
+  // console.log('传过来的其他数据', props.otherInfo)
 
   if (!isNewRef.value && editData.value) {
     // 编辑用户的数据
@@ -75,12 +68,10 @@ function handleConfirmClick() {
       editData.value.id,
       infoData
     )
-    console.log({ ...infoData })
-
+    // console.log('我是要传给服务器的数据', infoData)
   } else {
     // 创建新的部门
     systemStore.newPageDataAction(props.modalConfig.pageName, infoData)
-    console.log(infoData)
   }
 }
 </script>
