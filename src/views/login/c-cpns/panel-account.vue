@@ -1,9 +1,9 @@
-<script setup lang='ts'>
-import type { FormRules, ElForm } from 'element-plus';
-import { reactive, ref } from 'vue';
+<script setup lang="ts">
+import type { FormRules, ElForm } from 'element-plus'
+import { reactive, ref } from 'vue'
 import useLoginStore from '@/store/login/login'
-import type { IAccount } from "@/types/login"
-import { localCache } from '@/utils/cache';
+import type { IAccount } from '@/types/login'
+import { localCache } from '@/utils/cache'
 
 const CACHE_NAME = 'name'
 const CACHE_PASSWORD = 'password'
@@ -53,7 +53,7 @@ function loginAction(isRemPwd: boolean) {
         }
       })
     } else {
-      ElMessage.error("请输入正确的格式后再操作")
+      ElMessage.error('请输入正确的格式后再操作')
     }
   })
 }
@@ -64,7 +64,13 @@ defineExpose({
 
 <template>
   <div class="panel-account">
-    <el-form :model="account" label-width="60px" :rules="accountRules" ref="formRef" status-icon>
+    <el-form
+      :model="account"
+      label-width="60px"
+      :rules="accountRules"
+      ref="formRef"
+      status-icon
+    >
       <el-form-item label="账号" prop="name">
         <el-input v-model="account.name" />
       </el-form-item>
@@ -75,7 +81,7 @@ defineExpose({
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .panel-account {
   color: red;
 }

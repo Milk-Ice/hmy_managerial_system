@@ -1,5 +1,5 @@
-<script setup lang='ts'>
-import { ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue'
 import DepartmentSearch from '@/views/main/system/department/c-cpns/department-search.vue'
 // import DepartmentSearch from '@/components/page-search/page-search.vue'
 import DepartmentContent from '@/views/main/system/department/c-cpns/department-content.vue'
@@ -20,7 +20,6 @@ function HandleQueryClick(queryInfo: any) {
 // 新增
 function HandleNewClick(formData: any) {
   modalRef.value?.setModalVisible(formData)
-
 }
 // 编辑
 function HandleEditClick(formData: any) {
@@ -30,13 +29,21 @@ function HandleEditClick(formData: any) {
 
 <template>
   <div class="department">
-    <department-search ref="searchRef" @reset-click="HandleResetClick" @query-click="HandleQueryClick" />
-    <department-content ref="contentRef" @edit-click="HandleEditClick" @new-click="HandleNewClick" />
+    <department-search
+      ref="searchRef"
+      @reset-click="HandleResetClick"
+      @query-click="HandleQueryClick"
+    />
+    <department-content
+      ref="contentRef"
+      @edit-click="HandleEditClick"
+      @new-click="HandleNewClick"
+    />
     <department-modal ref="modalRef" />
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .department {
   border-radius: 8px;
   overflow: hidden;

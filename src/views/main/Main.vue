@@ -1,7 +1,7 @@
-<script setup lang='ts'>
-import MianMenu from "@/components/mian-menu/mian-menu.vue";
-import MainHeader from "@/components/main-header/main-header.vue"
-import { ref } from "vue";
+<script setup lang="ts">
+import MianMenu from '@/components/mian-menu/mian-menu.vue'
+import MainHeader from '@/components/main-header/main-header.vue'
+import { ref } from 'vue'
 const isFold = ref(false)
 function handleFoleChaneg(flag: boolean) {
   isFold.value = flag
@@ -30,7 +30,7 @@ function handleFoleChaneg(flag: boolean) {
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .main {
   height: 100%;
 }
@@ -64,7 +64,5 @@ function handleFoleChaneg(flag: boolean) {
   .el-main {
     background-color: #f0f2f5;
   }
-
-
 }
 </style>

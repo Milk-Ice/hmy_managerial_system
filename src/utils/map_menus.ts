@@ -1,7 +1,6 @@
-import type { RouteRecordRaw } from "vue-router"
+import type { RouteRecordRaw } from 'vue-router'
 
 function loadLocalRoutes() {
-
   // 1.获取菜单(userMenus代码写在位置)
 
   // 2.动态获取所有的路由对象
@@ -10,7 +9,7 @@ function loadLocalRoutes() {
   const localRoute: RouteRecordRaw[] = []
 
   // 获取所有的ts文件
-  const files = import.meta.glob('../router/main/**/*.ts', { eager: true })//拿到的是对象类型
+  const files = import.meta.glob('../router/main/**/*.ts', { eager: true }) //拿到的是对象类型
   // console.log(files)
   for (const key in files) {
     const module: any = files[key]
@@ -21,7 +20,6 @@ function loadLocalRoutes() {
 }
 export let firstMenu: any = null
 export function mapMenuToRoute(userMenus: any[]) {
-
   const localRoute = loadLocalRoutes()
   // 3.根据菜单去匹配正确的路由router.addRoute('main', xxx)
   const routes: RouteRecordRaw[] = []
@@ -49,8 +47,7 @@ export function mapMenuToRoute(userMenus: any[]) {
 export function mapPathToMenu(path: string, userMenus: any[]) {
   for (const menu of userMenus) {
     for (const submenu of menu.children) {
-      if (submenu.url === path)
-        return submenu
+      if (submenu.url === path) return submenu
     }
   }
   return undefined
@@ -80,7 +77,6 @@ export function mapPathToBreadcrumb(path: string, userMenus: any[]) {
   }
   return breadcrumb
 }
-
 
 /**
  * 将嵌套的菜单列表映射为包含所有菜单项的 ID 数组。
@@ -114,8 +110,6 @@ export function mapMenuListToIds(menuList: any[]): number[] {
   // 返回包含所有菜单项的 ID 数组
   return ids
 }
-
-
 
 /**
  * 从菜单映射到按钮的权限

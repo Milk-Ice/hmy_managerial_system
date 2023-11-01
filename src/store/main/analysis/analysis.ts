@@ -1,5 +1,5 @@
-import { getAmountListData } from "@/service/mian/analysis/analysis";
-import { defineStore } from "pinia";
+import { getAmountListData } from '@/service/mian/analysis/analysis'
+import { defineStore } from 'pinia'
 
 interface IAnalysisState {
   amountList: any[]

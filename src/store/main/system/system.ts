@@ -1,7 +1,16 @@
-import { deletePageListData, deleteUserListData, editPageData, editUserData, newPageData, newUserData, postPageListData, postUserListData } from "@/service/mian/system/system";
-import { defineStore } from "pinia";
+import {
+  deletePageListData,
+  deleteUserListData,
+  editPageData,
+  editUserData,
+  newPageData,
+  newUserData,
+  postPageListData,
+  postUserListData
+} from '@/service/mian/system/system'
+import { defineStore } from 'pinia'
 import type { ISystemState } from '@/types/main/system/system'
-import useMainStore from "../main";
+import useMainStore from '../main'
 
 const useSystemStore = defineStore('system', {
   state: (): ISystemState => ({
@@ -9,8 +18,7 @@ const useSystemStore = defineStore('system', {
     userTotalCount: 0,
 
     pageList: [],
-    pageToTalCount: 0,
-
+    pageToTalCount: 0
   }),
   actions: {
     async postUserListAction(queryInfo: any) {
@@ -20,7 +28,6 @@ const useSystemStore = defineStore('system', {
       // console.log(list)
       this.userTotalCount = totalCount
       this.usersList = list
-
     },
     async deleteUserListAction(id: number) {
       //1. 删除数据操作
@@ -85,8 +92,7 @@ const useSystemStore = defineStore('system', {
       // 获取完整的数据
       const mainStore = useMainStore()
       mainStore.fetchEntireDataAction()
-    },
+    }
   }
-
 })
 export default useSystemStore

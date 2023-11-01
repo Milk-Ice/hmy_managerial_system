@@ -1,10 +1,9 @@
-<script setup lang='ts'>
-import { ref } from 'vue';
-import panelAccount from './panel-account.vue';
-import panelPhone from './panel-phone.vue';
-import { localCache } from '@/utils/cache';
-import { watch } from 'vue';
-
+<script setup lang="ts">
+import { ref } from 'vue'
+import panelAccount from './panel-account.vue'
+import panelPhone from './panel-phone.vue'
+import { localCache } from '@/utils/cache'
+import { watch } from 'vue'
 
 const isRemPwd = ref<boolean>(localCache.getCache('isRemPwd') ?? false)
 const activeName = ref('account')
@@ -61,11 +60,13 @@ function handleLoginBtnClick() {
       <el-link type="primary">忘记密码</el-link>
     </div>
     <!-- 立即登录 -->
-    <el-button class="login-btn" type="primary" @click="handleLoginBtnClick">立即登录</el-button>
+    <el-button class="login-btn" type="primary" @click="handleLoginBtnClick"
+      >立即登录</el-button
+    >
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .login-panel {
   width: 330px;
   height: 150px;
@@ -86,7 +87,6 @@ function handleLoginBtnClick() {
     width: 100%;
 
     --el-component-size: 50px !important;
-
   }
 }
 </style>

@@ -1,7 +1,7 @@
-import { LOGIN_TOKEN } from "@/gobal/constants";
-import { localCache } from "@/utils/cache";
-import { firstMenu } from "@/utils/map_menus";
-import { createRouter, createWebHashHistory } from "vue-router";
+import { LOGIN_TOKEN } from '@/gobal/constants'
+import { localCache } from '@/utils/cache'
+import { firstMenu } from '@/utils/map_menus'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -13,19 +13,18 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import("@/views/login/Login.vue")
+      component: () => import('@/views/login/Login.vue')
     },
     {
       path: '/main',
       name: 'main',
-      component: () => import('@/views/main/Main.vue'),
+      component: () => import('@/views/main/Main.vue')
     },
     {
       path: '/:pathMatch(.*)',
-      component: () => import("@/views/NotFound/NotFound.vue")
+      component: () => import('@/views/NotFound/NotFound.vue')
     }
   ]
-
 })
 // 路由守卫
 router.beforeEach((to) => {

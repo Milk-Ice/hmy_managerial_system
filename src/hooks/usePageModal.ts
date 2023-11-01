@@ -1,10 +1,13 @@
-import { ref } from "vue"
+import { ref } from 'vue'
 import PageModal from '@/components/page-modal/page-modal.vue'
 
 // 回调函数的类型
 type CallbackFnType = (data?: any) => void
 
-function usePageModal(newCallBack?: CallbackFnType, editCallBack?: CallbackFnType) {
+function usePageModal(
+  newCallBack?: CallbackFnType,
+  editCallBack?: CallbackFnType
+) {
   const modalRef = ref<InstanceType<typeof PageModal>>()
 
   // 新增
@@ -26,6 +29,5 @@ function usePageModal(newCallBack?: CallbackFnType, editCallBack?: CallbackFnTyp
     HandleEditClick
   }
 }
-
 
 export default usePageModal

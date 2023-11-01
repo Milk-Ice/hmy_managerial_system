@@ -1,4 +1,4 @@
-import { ref } from "vue"
+import { ref } from 'vue'
 import PageContent from '@/components/page-content/page-content.vue'
 
 function usePageContent() {

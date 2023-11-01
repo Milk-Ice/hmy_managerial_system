@@ -8,6 +8,7 @@ export interface HMYInterceptors<T = AxiosResponse> {
   responseFailureFn?: (err: any) => any
 }
 
-export interface HMYRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
+export interface HMYRequestConfig<T = AxiosResponse>
+  extends AxiosRequestConfig {
   interceptors?: HMYInterceptors<T>
 }

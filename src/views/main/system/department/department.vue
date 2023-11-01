@@ -1,5 +1,5 @@
-<script setup lang='ts'>
-import { ref, computed } from 'vue';
+<script setup lang="ts">
+import { ref, computed } from 'vue'
 // import DepartmentSearch from '@/views/main/system/department/c-cpns/department-search.vue'
 import PageSearch from '@/components/page-search/page-search.vue'
 import PageContent from '@/components/page-content/page-content.vue'
@@ -9,7 +9,7 @@ import searchConfig from './config/search.config'
 import contentConfig from './config/content.config'
 import modalConfig from './config/modal.config'
 import useMainStore from '@/store/main/main'
-import usePageContent from '@/hooks/usePageContent';
+import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
 // 对modalConfig进行操作
 const modalConfigRef = computed(() => {
@@ -38,21 +38,27 @@ const { modalRef, HandleNewClick, HandleEditClick } = usePageModal()
 
 <template>
   <div class="department">
-    <page-search ref="searchRef" :search-config="searchConfig" @reset-click="HandleResetClick"
-      @query-click="HandleQueryClick" />
-    <page-content ref="contentRef" :content-config="contentConfig" @edit-click="HandleEditClick"
-      @new-click="HandleNewClick">
-      <template #leader="scope">自定义{{ scope.row[scope.prop] }}
-      </template>
-      <template #parent="scope">自定义{{ scope.row[scope.prop] }}
-      </template>
+    <page-search
+      ref="searchRef"
+      :search-config="searchConfig"
+      @reset-click="HandleResetClick"
+      @query-click="HandleQueryClick"
+    />
+    <page-content
+      ref="contentRef"
+      :content-config="contentConfig"
+      @edit-click="HandleEditClick"
+      @new-click="HandleNewClick"
+    >
+      <template #leader="scope">自定义{{ scope.row[scope.prop] }} </template>
+      <template #parent="scope">自定义{{ scope.row[scope.prop] }} </template>
     </page-content>
     <!-- page-modal接受一个名为modalConfig的属性 -->
     <page-modal :modal-config="modalConfigRef" ref="modalRef" />
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .department {
   border-radius: 8px;
   overflow: hidden;

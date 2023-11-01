@@ -19,9 +19,7 @@ const contentConfig = {
     { type: 'timer', label: '创建时间', prop: 'createAt' },
     { type: 'timer', label: '更新时间', prop: 'updateAt' },
 
-    { type: 'handler', label: '操作' },
-
-
+    { type: 'handler', label: '操作' }
   ]
 }
 export default contentConfig

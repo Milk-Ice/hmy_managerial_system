@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import { ref, reactive } from 'vue'
 import useSystemStore from '@/store/main/system/system'
 
@@ -10,16 +10,16 @@ interface IModalProps {
   modalConfig: {
     pageName: string
     header: {
-      newTitle: string,
+      newTitle: string
       editTitle: string
-    },
-    formItems: any[],
+    }
+    formItems: any[]
   }
   otherInfo?: any
 }
 
 // 1.定义内部的属性
-const dialogVisible = ref(false)// 控制Modal的显示和隐藏
+const dialogVisible = ref(false) // 控制Modal的显示和隐藏
 const initialData: any = {} // 使用表单项的初始值，如果不存在则使用空字符串
 
 // 遍历父组件传递的表单项配置，将每个表单项的 prop 作为键，初始值作为值存储在 initialData 中
@@ -81,23 +81,39 @@ function handleConfirmClick() {
 }
 // 暴露的属性和方法
 defineExpose({ setModalVisible })
-
 </script>
 
 <template>
   <div class="user-modal">
-    <el-dialog v-model="dialogVisible" :title="isNewRef ? modalConfig.header.newTitle : modalConfig.header.editTitle"
-      width="30%" center>
+    <el-dialog
+      v-model="dialogVisible"
+      :title="
+        isNewRef ? modalConfig.header.newTitle : modalConfig.header.editTitle
+      "
+      width="30%"
+      center
+    >
       <el-form :model="formData" label-width="100px">
         <template v-for="item in modalConfig.formItems" :key="item.prop">
           <el-form-item :label="item.label" :prop="item.name">
             <template v-if="item.type === 'input'">
-              <el-input v-model="formData[item.prop]" :placeholder="item.placeholder" style="width: 300px;" />
+              <el-input
+                v-model="formData[item.prop]"
+                :placeholder="item.placeholder"
+                style="width: 300px"
+              />
             </template>
             <template v-if="item.type === 'select'">
-              <el-select v-model="formData[item.prop]" :placeholder="item.placeholder" style="width: 300px;">
+              <el-select
+                v-model="formData[item.prop]"
+                :placeholder="item.placeholder"
+                style="width: 300px"
+              >
                 <template v-for="option in item.options" :key="option.value">
-                  <el-option :label="option.label" :value="option.value"></el-option>
+                  <el-option
+                    :label="option.label"
+                    :value="option.value"
+                  ></el-option>
                 </template>
               </el-select>
             </template>
@@ -121,7 +137,7 @@ defineExpose({ setModalVisible })
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .user-modal {
   color: red;
 }

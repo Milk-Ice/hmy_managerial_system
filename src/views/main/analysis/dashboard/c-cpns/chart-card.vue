@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 interface IProps {
   header?: string
 }
@@ -15,4 +15,4 @@ withDefaults(defineProps<IProps>(), {
   </div>
 </template>
 
-<style lang='less' scoped></style>
+<style lang="less" scoped></style>

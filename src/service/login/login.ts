@@ -1,5 +1,5 @@
 import myRequest from '..'
-import type { IAccount } from "@/types/login"
+import type { IAccount } from '@/types/login'
 
 // 携带用户信息发送登陆请求
 export function accountLoginRequest(account: IAccount) {

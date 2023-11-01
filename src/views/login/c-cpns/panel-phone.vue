@@ -1,6 +1,4 @@
-<script setup lang='ts'>
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="panel-phone">
@@ -8,7 +6,7 @@
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .panel-phone {
   color: red;
 }

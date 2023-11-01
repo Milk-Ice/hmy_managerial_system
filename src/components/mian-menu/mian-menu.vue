@@ -1,9 +1,8 @@
-
-<script setup lang='ts'>
-import { computed } from "vue"
-import useLoginStore from "@/store/login/login"
-import { mapPathToMenu } from "@/utils/map_menus"
-import { useRoute, useRouter } from "vue-router"
+<script setup lang="ts">
+import { computed } from 'vue'
+import useLoginStore from '@/store/login/login'
+import { mapPathToMenu } from '@/utils/map_menus'
+import { useRoute, useRouter } from 'vue-router'
 const loginStore = useLoginStore()
 const userMenu = loginStore.userMenus
 
@@ -33,12 +32,17 @@ const defaultActive = computed(() => {
 <template>
   <div class="mian-menu">
     <div class="logo">
-      <img class="img" src="../../assets/img/logo.png" alt="">
+      <img class="img" src="../../assets/img/logo.png" alt="" />
       <h2 class="title" v-show="!isFold">管理系统</h2>
     </div>
     <div class="menu">
-      <el-menu :default-active="defaultActive" text-color="#b7bdc3" active-text-color="#fff" background-color="#0a60bd"
-        :collapse="isFold">
+      <el-menu
+        :default-active="defaultActive"
+        text-color="#b7bdc3"
+        active-text-color="#fff"
+        background-color="#0a60bd"
+        :collapse="isFold"
+      >
         <!-- 遍历整个菜单 -->
         <template v-for="item in userMenu" :key="item.id">
           <el-sub-menu :index="item.id + ''">
@@ -51,7 +55,12 @@ const defaultActive = computed(() => {
             </template>
             <!-- 遍历菜单的子元素 -->
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''" @click="handleItemClick(subitem)"> {{ subitem.name }} </el-menu-item>
+              <el-menu-item
+                :index="subitem.id + ''"
+                @click="handleItemClick(subitem)"
+              >
+                {{ subitem.name }}
+              </el-menu-item>
             </template>
           </el-sub-menu>
         </template>
@@ -60,9 +69,8 @@ const defaultActive = computed(() => {
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .mian-menu {
-
   .logo {
     height: 28px;
     display: flex;
@@ -104,10 +112,9 @@ const defaultActive = computed(() => {
       }
 
       .el-menu-item.is-active {
-        background-color: #0a60bd
+        background-color: #0a60bd;
       }
     }
-
   }
 }
 </style>

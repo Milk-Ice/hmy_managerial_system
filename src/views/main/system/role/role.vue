@@ -17,7 +17,10 @@ import { mapMenuListToIds } from '@/utils/map_menus'
 // 点击search、content的逻辑
 const { contentRef, HandleResetClick, HandleQueryClick } = usePageContent()
 // 点击content、modal的逻辑
-const { modalRef, HandleNewClick, HandleEditClick } = usePageModal(newCallBack, editCallBack)
+const { modalRef, HandleNewClick, HandleEditClick } = usePageModal(
+  newCallBack,
+  editCallBack
+)
 
 // 获取菜单
 const mainStore = useMainStore()
@@ -54,19 +57,37 @@ function newCallBack() {
 
 <template>
   <div class="role">
-    <page-search ref="searchRef" :search-config="searchConfig" @reset-click="HandleResetClick"
-      @query-click="HandleQueryClick" />
-    <page-content ref="contentRef" :content-config="contentConfig" @edit-click="HandleEditClick"
-      @new-click="HandleNewClick" />
-    <page-modal :modal-config="modalConfig" :other-info="otherInfo" ref="modalRef">
+    <page-search
+      ref="searchRef"
+      :search-config="searchConfig"
+      @reset-click="HandleResetClick"
+      @query-click="HandleQueryClick"
+    />
+    <page-content
+      ref="contentRef"
+      :content-config="contentConfig"
+      @edit-click="HandleEditClick"
+      @new-click="HandleNewClick"
+    />
+    <page-modal
+      :modal-config="modalConfig"
+      :other-info="otherInfo"
+      ref="modalRef"
+    >
       <!-- 具名插槽，命名为 "menulist" -->
       <template #menulist>
-        <el-tree ref="treeRef" :data="entireMenus" show-checkbox node-key="id"
-          :props="{ children: 'children', label: 'name' }" @check="handleCheckClick">
-        </el-tree></template>
+        <el-tree
+          ref="treeRef"
+          :data="entireMenus"
+          show-checkbox
+          node-key="id"
+          :props="{ children: 'children', label: 'name' }"
+          @check="handleCheckClick"
+        >
+        </el-tree
+      ></template>
     </page-modal>
   </div>
 </template>
-
 
 <style lang="less" scoped></style>

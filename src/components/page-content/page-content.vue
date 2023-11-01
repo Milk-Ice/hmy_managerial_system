@@ -1,6 +1,6 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
 import useSystemStore from '@/store/main/system/system'
 import userPermisson from '@/hooks/usePermission'
@@ -10,10 +10,9 @@ interface IProps {
     header?: {
       title?: string
       btnTitle?: string
-    },
-    propsList: any[],
+    }
+    propsList: any[]
     childrenTree?: any
-
   }
 }
 const props = defineProps<IProps>()
@@ -28,7 +27,11 @@ const pageSize = ref(10)
 //监听systemStore中的action被执行
 systemStore.$onAction(({ name, after }) => {
   after(() => {
-    if (name === 'deletePageByIdAction' || name === 'editPageDataAction' || name === 'newPageDataAction') {
+    if (
+      name === 'deletePageByIdAction' ||
+      name === 'editPageDataAction' ||
+      name === 'newPageDataAction'
+    ) {
       currentPage.value = 1
     }
   })
@@ -81,8 +84,9 @@ const isEdit = userPermisson(`${props.contentConfig.pageName}:update`)
     <div class="header">
       <h3 class="title">{{ contentConfig?.header?.title ?? '数据列表' }}</h3>
       <!-- 增加数据 -->
-      <el-button v-if="isCreate" type="primary"
-        @click="HandleAddClick">{{ contentConfig?.header?.btnTitle ?? '新建数据' }}</el-button>
+      <el-button v-if="isCreate" type="primary" @click="HandleAddClick">{{
+        contentConfig?.header?.btnTitle ?? '新建数据'
+      }}</el-button>
     </div>
     <div class="table">
       <el-table :data="pageList" style="width: 100%" row-key="id" border>
@@ -98,36 +102,57 @@ const isEdit = userPermisson(`${props.contentConfig.pageName}:update`)
             <!-- 编辑、删除操作 -->
             <el-table-column v-bind="item" align="center">
               <template #default="scoped">
-                <el-button v-if="isEdit" type="primary" text icon="Edit"
-                  @click="HandleEditClick(scoped.row)">编辑</el-button>
-                <el-button v-if="isDelete" type="danger" text icon="Delete"
-                  @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
+                <el-button
+                  v-if="isEdit"
+                  type="primary"
+                  text
+                  icon="Edit"
+                  @click="HandleEditClick(scoped.row)"
+                  >编辑</el-button
+                >
+                <el-button
+                  v-if="isDelete"
+                  type="danger"
+                  text
+                  icon="Delete"
+                  @click="HandleDeleteClick(scoped.row.id)"
+                  >删除</el-button
+                >
               </template>
             </el-table-column>
           </template>
           <template v-else-if="item.type === 'custom'">
             <el-table-column v-bind="item" align="center" width="400px">
               <template #default="scope">
-                <slot :name="item.slotName" v-bind="scope" :prop="item.prop"></slot>
+                <slot
+                  :name="item.slotName"
+                  v-bind="scope"
+                  :prop="item.prop"
+                ></slot>
               </template>
             </el-table-column>
           </template>
           <template v-else>
             <el-table-column v-bind="item" align="center" />
           </template>
-
         </template>
       </el-table>
     </div>
     <div class="pagenation">
-      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[10, 20, 30]"
-        layout="total, sizes, prev, pager, next, jumper" :total="pageToTalCount" @size-change="handleSizeChange"
-        @current-change="handleCurrentChange" />
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[10, 20, 30]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="pageToTalCount"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
     </div>
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .content {
   margin-top: 20px;
   padding: 20px;

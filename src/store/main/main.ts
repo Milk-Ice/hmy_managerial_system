@@ -1,5 +1,9 @@
-import { getEntireDepartment, getEntireMenuList, getEntireRoles } from "@/service/mian/mian";
-import { defineStore } from "pinia";
+import {
+  getEntireDepartment,
+  getEntireMenuList,
+  getEntireRoles
+} from '@/service/mian/mian'
+import { defineStore } from 'pinia'
 interface IMain {
   entireRoles: any[]
   entireDepartments: any[]

@@ -14,7 +14,7 @@ import useMainStore from '../main/main'
 interface ILoginState {
   token: string
   userInfo: any
-  userMenus: any,
+  userMenus: any
   permissions: string[]
 }
 
@@ -25,7 +25,6 @@ const useLoginStore = defineStore('login', {
     userInfo: {},
     userMenus: [],
     permissions: []
-
   }),
   actions: {
     async loginAccountAction(account: IAccount) {
@@ -86,7 +85,6 @@ const useLoginStore = defineStore('login', {
         routes.forEach((route) => router.addRoute('main', route))
       }
     }
-
   }
 })
 

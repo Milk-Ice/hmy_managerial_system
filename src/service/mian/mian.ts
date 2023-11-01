@@ -1,4 +1,4 @@
-import hmyRequest from "..";
+import hmyRequest from '..'
 
 export function getEntireRoles() {
   return hmyRequest.post({

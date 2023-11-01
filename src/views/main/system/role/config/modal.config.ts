@@ -20,7 +20,7 @@ const modalConfig = {
     {
       type: 'custom',
       slotName: 'menulist'
-    },
+    }
   ]
 }
 

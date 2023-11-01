@@ -1,7 +1,7 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import useSystemStore from '@/store/main/system/system'
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
 // 1.发起action，请求userList的数据
 const systemStore = useSystemStore()
@@ -60,9 +60,24 @@ function HandleEditClick(itemData: any) {
         <el-table-column type="selection" width="55" />
         <el-table-column label="序号" type="index" width="55" />
 
-        <el-table-column prop="name" label="部门名称" width="180" align="center" />
-        <el-table-column prop="leader" label="部门领导" width="180" align="center" />
-        <el-table-column prop="parentId" label="上级部门" width="180" align="center" />
+        <el-table-column
+          prop="name"
+          label="部门名称"
+          width="180"
+          align="center"
+        />
+        <el-table-column
+          prop="leader"
+          label="部门领导"
+          width="180"
+          align="center"
+        />
+        <el-table-column
+          prop="parentId"
+          label="上级部门"
+          width="180"
+          align="center"
+        />
         <el-table-column prop="createAt" label="创建时间" align="center">
           <template #default="scoped">
             {{ formatUTC(scoped.row.createAt) }}
@@ -76,22 +91,39 @@ function HandleEditClick(itemData: any) {
         <!-- 新增、删除操作 -->
         <el-table-column label="操作" width="260" align="center">
           <template #default="scoped">
-            <el-button type="primary" text icon="Edit" @click="HandleEditClick(scoped.row)">编辑</el-button>
-            <el-button type="danger" text icon="Delete" @click="HandleDeleteClick(scoped.row.id)">删除</el-button>
+            <el-button
+              type="primary"
+              text
+              icon="Edit"
+              @click="HandleEditClick(scoped.row)"
+              >编辑</el-button
+            >
+            <el-button
+              type="danger"
+              text
+              icon="Delete"
+              @click="HandleDeleteClick(scoped.row.id)"
+              >删除</el-button
+            >
           </template>
         </el-table-column>
-
       </el-table>
     </div>
     <div class="pagenation">
-      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[10, 20, 30]"
-        layout="total, sizes, prev, pager, next, jumper" :total="pageToTalCount" @size-change="handleSizeChange"
-        @current-change="handleCurrentChange" />
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[10, 20, 30]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="pageToTalCount"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
     </div>
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .content {
   margin-top: 20px;
   padding: 20px;

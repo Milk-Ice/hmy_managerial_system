@@ -16,7 +16,7 @@ const searchConfig = {
     {
       type: 'date-picker',
       prop: 'createAt',
-      label: '创建时间',
+      label: '创建时间'
     }
   ]
 }

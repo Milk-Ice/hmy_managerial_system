@@ -12,6 +12,7 @@ analysisStore.fetchAnalysisDataAction()
 const { amountList } = storeToRefs(analysisStore)
 // 3.echarts相关逻辑
 const echartRef = ref<HTMLElement>()
+
 onMounted(() => {
   const echartInsrance = echarts.init(echartRef.value, 'light', {
     renderer: 'canvas'
@@ -52,7 +53,6 @@ onMounted(() => {
     ]
   })
 })
-
 </script>
 
 <template>
@@ -88,11 +88,9 @@ onMounted(() => {
       <el-col :span="12">
         <chart-card> 折线图2</chart-card>
       </el-col>
-
     </el-row>
   </div>
 </template>
-
 
 <style lang="less" scoped>
 .el-row {
@@ -100,6 +98,6 @@ onMounted(() => {
 }
 
 .echart {
-  height: 200px;
+  height: 250px;
 }
 </style>

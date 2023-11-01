@@ -1,7 +1,7 @@
-<script setup lang='ts'>
-import { ref } from 'vue';
-import headerCrumb from './c-cpns/header-crumb.vue';
-import HeaderInfo from "./c-cpns/header-info/header-info.vue"
+<script setup lang="ts">
+import { ref } from 'vue'
+import headerCrumb from './c-cpns/header-crumb.vue'
+import HeaderInfo from './c-cpns/header-info/header-info.vue'
 const isFold = ref(false)
 function handleMenuIconClick() {
   // console.log(11)
@@ -9,14 +9,13 @@ function handleMenuIconClick() {
   emit('foldchange', isFold.value)
 }
 const emit = defineEmits(['foldchange'])
-
 </script>
 
 <template>
   <div class="main-header">
     <div class="menu-icon" @click="handleMenuIconClick">
       <el-icon size="20px">
-        <component :is="isFold ? 'Expand': 'Fold'" />
+        <component :is="isFold ? 'Expand' : 'Fold'" />
       </el-icon>
     </div>
     <div class="content">
@@ -28,11 +27,10 @@ const emit = defineEmits(['foldchange'])
         <header-info />
       </div>
     </div>
-
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .main-header {
   display: flex;
   align-items: center;
@@ -52,7 +50,5 @@ const emit = defineEmits(['foldchange'])
     flex: 1;
     padding: 0 10px;
   }
-
-
 }
 </style>

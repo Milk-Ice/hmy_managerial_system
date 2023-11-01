@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import type { ElForm } from 'element-plus'
 import { reactive, ref } from 'vue'
 import userPermisson from '@/hooks/usePermission'
@@ -46,27 +46,34 @@ const formRef = ref<InstanceType<typeof ElForm>>()
           <el-col :span="8">
             <el-form-item :label="item.label" :prop="item.prop">
               <template v-if="item.type === 'input'">
-                <el-input v-model="searchForm[item.prop]" :placeholder="item.placeholder" />
+                <el-input
+                  v-model="searchForm[item.prop]"
+                  :placeholder="item.placeholder"
+                />
               </template>
               <template v-if="item.type === 'date-picker'">
-                <el-date-picker v-model="searchForm[item.prop]" type="daterange" start-placeholder="开始时间"
-                  end-placeholder="结束时间" />
+                <el-date-picker
+                  v-model="searchForm[item.prop]"
+                  type="daterange"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                />
               </template>
             </el-form-item>
           </el-col>
         </template>
-
       </el-row>
-
     </el-form>
     <div class="btns">
       <el-button icon="Refresh" @click="hanleResetClick">重置</el-button>
-      <el-button icon="Search" type="primary" @click="handleQueryClick">查询</el-button>
+      <el-button icon="Search" type="primary" @click="handleQueryClick"
+        >查询</el-button
+      >
     </div>
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .user-search {
   background-color: #fff;
   padding: 20px;

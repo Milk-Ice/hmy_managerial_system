@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { CountUp } from 'countup.js'
 interface IProps {
@@ -35,7 +35,12 @@ onMounted(() => {
   <div class="count-card">
     <div class="header">
       <span>{{ title }}</span>
-      <el-tooltip class="box-item" effect="dark" :content="tips" placement="top">
+      <el-tooltip
+        class="box-item"
+        effect="dark"
+        :content="tips"
+        placement="top"
+      >
         <el-icon>
           <ShoppingBag />
         </el-icon>
@@ -51,7 +56,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .count-card {
   display: flex;
   flex-direction: column;
