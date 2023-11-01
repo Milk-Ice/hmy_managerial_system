@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BaseEcharts: typeof import('./src/components/page-echarts/src/base-echarts.vue')['default']
+    ChatRose: typeof import('./src/components/page-echarts/src/chat-rose.vue')['default']
+    ChatRouse: typeof import('./src/components/page-echarts/src/chat-rouse.vue')['default']
     copy: typeof import('./src/components/page-echarts/src/pie-echarts copy.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
@@ -53,6 +55,7 @@ declare module 'vue' {
     PageModal: typeof import('./src/components/page-modal/page-modal.vue')['default']
     PageSearch: typeof import('./src/components/page-search/page-search.vue')['default']
     PieEcharts: typeof import('./src/components/page-echarts/src/pie-echarts.vue')['default']
+    RoseEcharts: typeof import('./src/components/page-echarts/src/rose-echarts.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

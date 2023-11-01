@@ -6,6 +6,7 @@ import chartCard from './c-cpns/chart-card.vue'
 import useAnalysisStore from '@/store/main/analysis/analysis'
 import pieEcharts from '@/components/page-echarts/src/pie-echarts.vue'
 import lineEcharts from '@/components/page-echarts/src/line-echarts.vue'
+import RoseEcharts from '@/components/page-echarts/src/rose-echarts.vue'
 
 // 1.发起数据的亲求
 const analysisStore = useAnalysisStore()
@@ -17,7 +18,7 @@ analysisStore.fetchGoodsCategorySaleDataAction()
 const {
   amountList,
   goodsCategoryCount,
-  goodAddressSaleList,
+  // goodAddressSaleList,
   goodsCategorySale
 } = storeToRefs(analysisStore)
 // Map每个分类商品的个数(饼图)
@@ -35,12 +36,12 @@ const showGoodsCategorySale = computed(() => {
 })
 // console.log(goodsCategorySale)
 // Map不同城市的销量数据(折线图)
-const showGoodsAddressSale = computed(() => {
-  return goodAddressSaleList.value.map((item) => ({
-    name: item.address,
-    value: item.count
-  }))
-})
+// const showGoodsAddressSale = computed(() => {
+//   return goodAddressSaleList.value.map((item) => ({
+//     name: item.address,
+//     value: item.count
+//   }))
+// })
 </script>
 
 <template>
@@ -66,7 +67,10 @@ const showGoodsAddressSale = computed(() => {
         <chart-card> </chart-card>
       </el-col>
       <el-col :span="7">
-        <chart-card> 饼图3</chart-card>
+        <!-- 玫瑰图 -->
+        <chart-card
+          ><rose-echarts :pie-data="showGoodsCategoryCount"
+        /></chart-card>
       </el-col>
     </el-row>
 
