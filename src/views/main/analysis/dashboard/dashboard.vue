@@ -14,12 +14,14 @@ analysisStore.fetchAnalysisDataAction()
 analysisStore.fetchGoodsCategoryCountDataAction()
 analysisStore.fetchGetGoodsAddressSaleDataAction()
 analysisStore.fetchGoodsCategorySaleDataAction()
+analysisStore.fetchGoodCategoryFavorDataAction()
 // 2.从store获取数据
 const {
   amountList,
   goodsCategoryCount,
   // goodAddressSaleList,
-  goodsCategorySale
+  goodsCategorySale,
+  goodsCategoryFavor
 } = storeToRefs(analysisStore)
 // Map每个分类商品的个数(饼图)
 const showGoodsCategoryCount = computed(() => {
@@ -34,14 +36,11 @@ const showGoodsCategorySale = computed(() => {
   const values = goodsCategorySale.value.map((item) => item.goodsCount)
   return { labels, values }
 })
-// console.log(goodsCategorySale)
-// Map不同城市的销量数据(折线图)
-// const showGoodsAddressSale = computed(() => {
-//   return goodAddressSaleList.value.map((item) => ({
-//     name: item.address,
-//     value: item.count
-//   }))
-// })
+const showGoodsCategoryFavor = computed(() => {
+  const labels = goodsCategoryFavor.value.map((item) => item.name)
+  const values = goodsCategoryFavor.value.map((item) => item.goodsFavor)
+  return { labels, values }
+})
 </script>
 
 <template>
@@ -82,7 +81,7 @@ const showGoodsCategorySale = computed(() => {
         /></chart-card>
       </el-col>
       <el-col :span="12">
-        <chart-card> 折线图2</chart-card>
+        <chart-card><bar-echart v-bind="showGoodsCategoryFavor" /></chart-card>
       </el-col>
     </el-row>
   </div>

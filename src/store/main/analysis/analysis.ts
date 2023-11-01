@@ -2,6 +2,7 @@ import {
   getAmountListData,
   getGoodsAddressSaleData,
   getGoodsCategoryCounttData,
+  getGoodsCategoryFavor,
   getGoodsCategorySaleData
 } from '@/service/mian/analysis/analysis'
 import { defineStore } from 'pinia'
@@ -11,13 +12,15 @@ interface IAnalysisState {
   goodsCategoryCount: any[] //每个分类商品的个数
   goodAddressSaleList: any[]
   goodsCategorySale: any[] //每个分类商品的销量
+  goodsCategoryFavor: any[] //每个分类商品的收藏
 }
 const useAnalysisStore = defineStore('analysis', {
   state: (): IAnalysisState => ({
     amountList: [],
     goodsCategoryCount: [],
     goodAddressSaleList: [],
-    goodsCategorySale: []
+    goodsCategorySale: [],
+    goodsCategoryFavor: []
   }),
   actions: {
     // 商品数据统计的数量
@@ -43,6 +46,12 @@ const useAnalysisStore = defineStore('analysis', {
       const goodAddressSaleResult = await getGoodsAddressSaleData()
       // console.log(goodAddressSaleResult)
       this.goodAddressSaleList = goodAddressSaleResult.data
+    },
+    // 每个分类商品的收藏
+    async fetchGoodCategoryFavorDataAction() {
+      const goodsCategoryFavorResult = await getGoodsCategoryFavor()
+      console.log(goodsCategoryFavorResult)
+      this.goodsCategoryFavor = goodsCategoryFavorResult.data
     }
   }
 })

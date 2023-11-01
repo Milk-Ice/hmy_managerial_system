@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormRules, ElForm } from 'element-plus'
+import { type FormRules, type ElForm, ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'
 import useLoginStore from '@/store/login/login'
 import type { IAccount } from '@/types/login'

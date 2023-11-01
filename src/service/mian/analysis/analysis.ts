@@ -24,3 +24,9 @@ export function getGoodsAddressSaleData() {
     url: '/goods/address/sale'
   })
 }
+// 每个分类商品的收藏
+export function getGoodsCategoryFavor() {
+  return hmyRequest.get({
+    url: '/goods/category/favor'
+  })
+}
