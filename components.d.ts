@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BaseEcharts: typeof import('./src/components/page-echarts/src/base-echarts.vue')['default']
+    copy: typeof import('./src/components/page-echarts/src/pie-echarts copy.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -44,11 +46,13 @@ declare module 'vue' {
     ElTree: typeof import('element-plus/es')['ElTree']
     HeaderCrumb: typeof import('./src/components/main-header/c-cpns/header-crumb.vue')['default']
     HeaderInfo: typeof import('./src/components/main-header/c-cpns/header-info/header-info.vue')['default']
+    LineEcharts: typeof import('./src/components/page-echarts/src/line-echarts.vue')['default']
     MainHeader: typeof import('./src/components/main-header/main-header.vue')['default']
     MianMenu: typeof import('./src/components/mian-menu/mian-menu.vue')['default']
     PageContent: typeof import('./src/components/page-content/page-content.vue')['default']
     PageModal: typeof import('./src/components/page-modal/page-modal.vue')['default']
     PageSearch: typeof import('./src/components/page-search/page-search.vue')['default']
+    PieEcharts: typeof import('./src/components/page-echarts/src/pie-echarts.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
