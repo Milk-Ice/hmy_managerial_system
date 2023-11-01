@@ -12,3 +12,15 @@ export function getGoodsCategoryCounttData() {
     url: '/goods/category/count'
   })
 }
+// 每个分类商品的销量
+export function getGoodsCategorySaleData() {
+  return hmyRequest.get({
+    url: '/goods/category/sale'
+  })
+}
+// 不同城市的销量数据
+export function getGoodsAddressSaleData() {
+  return hmyRequest.get({
+    url: '/goods/address/sale'
+  })
+}

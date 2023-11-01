@@ -11,17 +11,36 @@ import lineEcharts from '@/components/page-echarts/src/line-echarts.vue'
 const analysisStore = useAnalysisStore()
 analysisStore.fetchAnalysisDataAction()
 analysisStore.fetchGoodsCategoryCountDataAction()
+analysisStore.fetchGetGoodsAddressSaleDataAction()
+analysisStore.fetchGoodsCategorySaleDataAction()
 // 2.从store获取数据
-const { amountList, goodsCategoryCount } = storeToRefs(analysisStore)
-// console.log(goodsCategoryCount)
+const {
+  amountList,
+  goodsCategoryCount,
+  goodAddressSaleList,
+  goodsCategorySale
+} = storeToRefs(analysisStore)
+// Map每个分类商品的个数(饼图)
 const showGoodsCategoryCount = computed(() => {
   return goodsCategoryCount.value.map((item) => ({
     name: item.name,
     value: item.goodsCount
   }))
 })
-console.log(goodsCategoryCount)
-console.log(showGoodsCategoryCount.value)
+// Map每个分类商品的销量
+const showGoodsCategorySale = computed(() => {
+  const labels = goodsCategorySale.value.map((item) => item.name)
+  const values = goodsCategorySale.value.map((item) => item.goodsCount)
+  return { labels, values }
+})
+// console.log(goodsCategorySale)
+// Map不同城市的销量数据(折线图)
+const showGoodsAddressSale = computed(() => {
+  return goodAddressSaleList.value.map((item) => ({
+    name: item.address,
+    value: item.count
+  }))
+})
 </script>
 
 <template>
@@ -44,7 +63,7 @@ console.log(showGoodsCategoryCount.value)
       </el-col>
       <el-col :span="10">
         <!-- b.折线图 -->
-        <chart-card> <line-echarts /></chart-card>
+        <chart-card> </chart-card>
       </el-col>
       <el-col :span="7">
         <chart-card> 饼图3</chart-card>
@@ -54,7 +73,9 @@ console.log(showGoodsCategoryCount.value)
     <!-- 3.底部的图表 -->
     <el-row :gutter="20">
       <el-col :span="12">
-        <chart-card> 折线图1</chart-card>
+        <chart-card>
+          <line-echarts v-bind="showGoodsCategorySale"
+        /></chart-card>
       </el-col>
       <el-col :span="12">
         <chart-card> 折线图2</chart-card>
