@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watchEffect } from 'vue'
 import * as echarts from 'echarts'
 import type { EChartsOption } from 'echarts'
 
@@ -11,10 +11,12 @@ const props = defineProps<IProps>()
 const echartRef = ref<HTMLElement>()
 
 onMounted(() => {
+  // 1.初始化echarts实例
   const echartInsrance = echarts.init(echartRef.value, 'light', {
     renderer: 'canvas'
   })
-  echartInsrance.setOption(props.option)
+  // 2.watchEffect监听option变化，重新执行
+  watchEffect(() => echartInsrance.setOption(props.option))
 })
 </script>
 

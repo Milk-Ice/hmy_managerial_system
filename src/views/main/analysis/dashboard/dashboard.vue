@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 import countCard from './c-cpns/count-card.vue'
 import chartCard from './c-cpns/chart-card.vue'
 import useAnalysisStore from '@/store/main/analysis/analysis'
@@ -9,8 +10,18 @@ import lineEcharts from '@/components/page-echarts/src/line-echarts.vue'
 // 1.发起数据的亲求
 const analysisStore = useAnalysisStore()
 analysisStore.fetchAnalysisDataAction()
+analysisStore.fetchGoodsCategoryCountDataAction()
 // 2.从store获取数据
-const { amountList } = storeToRefs(analysisStore)
+const { amountList, goodsCategoryCount } = storeToRefs(analysisStore)
+// console.log(goodsCategoryCount)
+const showGoodsCategoryCount = computed(() => {
+  return goodsCategoryCount.value.map((item) => ({
+    name: item.name,
+    value: item.goodsCount
+  }))
+})
+console.log(goodsCategoryCount)
+console.log(showGoodsCategoryCount.value)
 </script>
 
 <template>
@@ -28,7 +39,7 @@ const { amountList } = storeToRefs(analysisStore)
       <el-col :span="7">
         <!-- a.饼图 -->
         <chart-card>
-          <pie-echarts />
+          <pie-echarts :pie-data="showGoodsCategoryCount" />
         </chart-card>
       </el-col>
       <el-col :span="10">
@@ -58,6 +69,6 @@ const { amountList } = storeToRefs(analysisStore)
 }
 
 .echart {
-  height: 250px;
+  height: 300px;
 }
 </style>
