@@ -9,10 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     BarEchart: typeof import('./src/components/page-echarts/src/bar-echart.vue')['default']
     BaseEchart: typeof import('./src/components/page-echarts/src/base-echart.vue')['default']
-    BaseEcharts: typeof import('./src/components/page-echarts/src/base-echarts.vue')['default']
-    ChatRose: typeof import('./src/components/page-echarts/src/chat-rose.vue')['default']
-    ChatRouse: typeof import('./src/components/page-echarts/src/chat-rouse.vue')['default']
-    copy: typeof import('./src/components/page-echarts/src/pie-echarts copy.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -51,7 +47,6 @@ declare module 'vue' {
     HeaderCrumb: typeof import('./src/components/main-header/c-cpns/header-crumb.vue')['default']
     HeaderInfo: typeof import('./src/components/main-header/c-cpns/header-info/header-info.vue')['default']
     LineEchart: typeof import('./src/components/page-echarts/src/line-echart.vue')['default']
-    LineEcharts: typeof import('./src/components/page-echarts/src/line-echarts.vue')['default']
     MainHeader: typeof import('./src/components/main-header/main-header.vue')['default']
     MapEchart: typeof import('./src/components/page-echarts/src/map-echart.vue')['default']
     MianMenu: typeof import('./src/components/mian-menu/mian-menu.vue')['default']
@@ -59,9 +54,7 @@ declare module 'vue' {
     PageModal: typeof import('./src/components/page-modal/page-modal.vue')['default']
     PageSearch: typeof import('./src/components/page-search/page-search.vue')['default']
     PieEchart: typeof import('./src/components/page-echarts/src/pie-echart.vue')['default']
-    PieEcharts: typeof import('./src/components/page-echarts/src/pie-echarts.vue')['default']
     RoseEchart: typeof import('./src/components/page-echarts/src/rose-echart.vue')['default']
-    RoseEcharts: typeof import('./src/components/page-echarts/src/rose-echarts.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

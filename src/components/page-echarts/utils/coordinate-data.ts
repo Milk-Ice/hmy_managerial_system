@@ -1,4 +1,5 @@
-export const coordinateData: any = {
+export const coordinateData: Record<string, number[]> = {
+  default: [0, 0],
   海门: [121.15, 31.89],
   鄂尔多斯: [109.781327, 39.608266],
   招远: [120.38, 37.35],
