@@ -1,35 +1,36 @@
 <script setup lang="ts">
-import baseEcharts from './base-echarts.vue'
+import baseEcharts from './base-echart.vue'
 import { computed } from 'vue'
 import type { EChartsOption } from 'echarts'
 import type { IEchartValueType } from '../types/index'
-interface IProps {
+export interface IProps {
   pieData: IEchartValueType[]
 }
 const props = defineProps<IProps>()
 const option = computed<EChartsOption>(() => {
   return {
-    tooltip: {
-      trigger: 'item'
-    },
     legend: {
-      orient: 'horizontal',
-      left: 'left'
+      top: 'bottom'
+    },
+    toolbox: {
+      show: true,
+      feature: {
+        mark: { show: true },
+        dataView: { show: true, readOnly: false },
+        restore: { show: true },
+        saveAsImage: { show: true }
+      }
     },
     series: [
       {
-        name: '访问来源',
         type: 'pie',
-        radius: '50%',
-        bottom: '-10%',
-        data: props.pieData,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
+        radius: [20, 160],
+        center: ['50%', '50%'],
+        roseType: 'area',
+        itemStyle: {
+          borderRadius: 8
+        },
+        data: props.pieData
       }
     ]
   }

@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import * as echarts from 'echarts'
-import BaseEchart from './base-echarts.vue'
+import BaseEchart from './base-echart.vue'
 import type { EChartsOption } from 'echarts'
 
 const props = defineProps<{

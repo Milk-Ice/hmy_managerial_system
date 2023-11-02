@@ -1,7 +1,9 @@
 {
   "files": [],
   "compilerOptions": {
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "references": [
     {

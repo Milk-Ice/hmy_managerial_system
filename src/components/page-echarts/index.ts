@@ -1,7 +1,10 @@
-import BaseEcharts from './src/base-echarts.vue'
-import PieEcharts from './src/pie-echarts.vue'
-import lineEcharts from './src/line-echarts.vue'
-import RoseEcharts from './src/rose-echarts.vue'
-import BarEcharts from './src/bar-echart.vue'
-export { PieEcharts, lineEcharts, RoseEcharts, BarEcharts }
-export default BaseEcharts
+import BaseEchart from './src/base-echart.vue'
+import PieEchart from './src/pie-echart.vue'
+import LineEchart from './src/line-echart.vue'
+import RoseEchart from './src/rose-echart.vue'
+import BarEchart from './src/bar-echart.vue'
+import MapEchart from './src/map-echart.vue'
+
+export { PieEchart, LineEchart, RoseEchart, BarEchart, MapEchart }
+
+export default BaseEchart

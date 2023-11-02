@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { CountUp } from 'countup.js'
-interface IProps {
+export interface IProps {
   amount?: string
   title?: string
   tips?: string

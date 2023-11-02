@@ -4,25 +4,31 @@ import { computed } from 'vue'
 import countCard from './c-cpns/count-card.vue'
 import chartCard from './c-cpns/chart-card.vue'
 import useAnalysisStore from '@/store/main/analysis/analysis'
-import pieEcharts from '@/components/page-echarts/src/pie-echarts.vue'
-import lineEcharts from '@/components/page-echarts/src/line-echarts.vue'
-import RoseEcharts from '@/components/page-echarts/src/rose-echarts.vue'
+import {
+  PieEchart,
+  LineEchart,
+  RoseEchart,
+  BarEchart,
+  MapEchart
+} from '@/components/page-echarts'
 
 // 1.发起数据的亲求
 const analysisStore = useAnalysisStore()
 analysisStore.fetchAnalysisDataAction()
 analysisStore.fetchGoodsCategoryCountDataAction()
-analysisStore.fetchGetGoodsAddressSaleDataAction()
 analysisStore.fetchGoodsCategorySaleDataAction()
 analysisStore.fetchGoodCategoryFavorDataAction()
+analysisStore.fetchGoodsAddressSaleAction()
 // 2.从store获取数据
 const {
   amountList,
   goodsCategoryCount,
   // goodAddressSaleList,
   goodsCategorySale,
-  goodsCategoryFavor
+  goodsCategoryFavor,
+  goodsAddressSale
 } = storeToRefs(analysisStore)
+console.log(amountList)
 // Map每个分类商品的个数(饼图)
 const showGoodsCategoryCount = computed(() => {
   return goodsCategoryCount.value.map((item) => ({
@@ -36,10 +42,18 @@ const showGoodsCategorySale = computed(() => {
   const values = goodsCategorySale.value.map((item) => item.goodsCount)
   return { labels, values }
 })
+// 每个分类商品的收藏
 const showGoodsCategoryFavor = computed(() => {
   const labels = goodsCategoryFavor.value.map((item) => item.name)
   const values = goodsCategoryFavor.value.map((item) => item.goodsFavor)
   return { labels, values }
+})
+// 地图
+const showGoodsAddressSale = computed(() => {
+  return goodsAddressSale.value.map((item) => ({
+    name: item.address,
+    value: item.count
+  }))
 })
 </script>
 
@@ -57,18 +71,20 @@ const showGoodsCategoryFavor = computed(() => {
     <el-row :gutter="20">
       <el-col :span="7">
         <!-- a.饼图 -->
-        <chart-card>
-          <pie-echarts :pie-data="showGoodsCategoryCount" />
+        <chart-card :header="'每个分类商品的个数'">
+          <pie-echart :pie-data="showGoodsCategoryCount" />
         </chart-card>
       </el-col>
       <el-col :span="10">
-        <!-- b.折线图 -->
-        <chart-card> </chart-card>
+        <!-- b.地图 -->
+        <chart-card :header="'不同城市的销量数据'"
+          ><map-echart :map-data="showGoodsAddressSale" />
+        </chart-card>
       </el-col>
       <el-col :span="7">
         <!-- 玫瑰图 -->
-        <chart-card
-          ><rose-echarts :pie-data="showGoodsCategoryCount"
+        <chart-card :header="'每个分类商品的个数'"
+          ><rose-echart :pie-data="showGoodsCategoryCount"
         /></chart-card>
       </el-col>
     </el-row>
@@ -76,12 +92,14 @@ const showGoodsCategoryFavor = computed(() => {
     <!-- 3.底部的图表 -->
     <el-row :gutter="20">
       <el-col :span="12">
-        <chart-card>
-          <line-echarts v-bind="showGoodsCategorySale"
+        <chart-card :header="'每个分类商品的销量'">
+          <line-echart v-bind="showGoodsCategorySale"
         /></chart-card>
       </el-col>
       <el-col :span="12">
-        <chart-card><bar-echart v-bind="showGoodsCategoryFavor" /></chart-card>
+        <chart-card :header="'每个分类商品的收藏'"
+          ><bar-echart v-bind="showGoodsCategoryFavor"
+        /></chart-card>
       </el-col>
     </el-row>
   </div>

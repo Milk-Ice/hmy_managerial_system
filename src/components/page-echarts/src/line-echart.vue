@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import baseEcharts from './base-echarts.vue'
+import baseEcharts from './base-echart.vue'
 import type { EChartsOption } from 'echarts'
 const props = defineProps<{
   labels: string[]
   values: string[]
 }>()
-console.log(props)
+// console.log(props)
 const option = computed<EChartsOption>(() => {
   return {
     tooltip: {
