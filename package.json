@@ -48,6 +48,7 @@
     "less": "^4.2.0",
     "npm-run-all2": "^6.0.6",
     "prettier": "^3.0.3",
+    "sass": "^1.69.5",
     "terser": "^5.24.0",
     "typescript": "~5.2.0",
     "unplugin-auto-import": "^0.16.6",
