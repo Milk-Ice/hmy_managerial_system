@@ -1,12 +1,11 @@
 <template>
   <div class="chat">
-    <h2>chat</h2>
+    <editor />
   </div>
 </template>
 
-<script setup lang="ts" name="chat"></script>
+<script setup lang="ts" name="chat">
+import editor from '@/components/editor/editor.vue'
+</script>
 
-<style scoped>
-.chat {
-}
-</style>
+<style scoped></style>
