@@ -4,17 +4,7 @@ import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
 import useSystemStore from '@/store/main/system/system'
 import userPermisson from '@/hooks/usePermission'
-interface IProps {
-  contentConfig: {
-    pageName: string
-    header?: {
-      title?: string
-      btnTitle?: string
-    }
-    propsList: any[]
-    childrenTree?: any
-  }
-}
+import type { IProps } from './type'
 const props = defineProps<IProps>()
 // 1.发起action，请求userList的数据
 const systemStore = useSystemStore()

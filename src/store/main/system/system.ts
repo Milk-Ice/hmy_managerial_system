@@ -33,6 +33,7 @@ const useSystemStore = defineStore('system', {
       //1. 删除数据操作
       const deleteResult = await deleteUserListData(id)
       console.log(deleteResult)
+
       // 重新请求数据
       this.postUserListAction({ offset: 0, size: 10 })
     },
@@ -40,12 +41,16 @@ const useSystemStore = defineStore('system', {
     async newUserDataAction(userInfo: any) {
       const userInfoResult = await newUserData(userInfo)
       console.log(userInfoResult)
+
+      // 2.重新请求新的数据
       this.postUserListAction({ offset: 0, size: 10 })
     },
     // 编辑操作
     async editUserDataAction(id: number, userInfo: any) {
       const editUserInfoResult = editUserData(id, userInfo)
       console.log(editUserInfoResult)
+
+      // 2.重新请求新的数据
       this.postUserListAction({ offset: 0, size: 10 })
     },
     // 针对页面的网络请求，增删改查
@@ -75,7 +80,7 @@ const useSystemStore = defineStore('system', {
       console.log('pageInfo', pageInfo)
       const pageDataResult = await newPageData(pageName, pageInfo)
       console.log(pageDataResult)
-
+      // 2.重新请求新的数据
       this.postPageListAction(pageName, { offset: 0, size: 10 })
 
       // 获取完整的数据
@@ -87,6 +92,8 @@ const useSystemStore = defineStore('system', {
       // console.log('pageInfo', pageInfo)
       const editPageInfoResult = editPageData(pageName, id, pageInfo)
       console.log(editPageInfoResult)
+
+      // 2.重新请求新的数据
       this.postPageListAction(pageName, { offset: 0, size: 10 })
 
       // 获取完整的数据

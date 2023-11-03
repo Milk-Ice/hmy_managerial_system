@@ -1,22 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import useSystemStore from '@/store/main/system/system'
+import type { IModalProps } from './type'
 
 // 0.接收父组件传来的数据
 const props = defineProps<IModalProps>()
-
-// 定义父组件传来的类型
-interface IModalProps {
-  modalConfig: {
-    pageName: string
-    header: {
-      newTitle: string
-      editTitle: string
-    }
-    formItems: any[]
-  }
-  otherInfo?: any
-}
 
 // 1.定义内部的属性
 const dialogVisible = ref(false) // 控制Modal的显示和隐藏
@@ -73,12 +61,13 @@ function handleConfirmClick() {
       editData.value.id,
       infoData
     )
-    // console.log('我是要传给服务器的数据', infoData)
+    console.log('我是要传给服务器的数据', infoData)
   } else {
     // 创建新的部门
     systemStore.newPageDataAction(props.modalConfig.pageName, infoData)
   }
 }
+
 // 暴露的属性和方法
 defineExpose({ setModalVisible })
 </script>
