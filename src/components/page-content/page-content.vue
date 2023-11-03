@@ -82,7 +82,7 @@ const isEdit = userPermisson(`${props.contentConfig.pageName}:update`)
       <el-table :data="pageList" style="width: 100%" row-key="id" border>
         <template v-for="item in contentConfig.propsList" :key="item.prop">
           <template v-if="item.type === 'timer'">
-            <el-table-column v-bind="item">
+            <el-table-column v-bind="item" align="center">
               <template #default="scoped">
                 {{ formatUTC(scoped.row[item.prop]) }}
               </template>
@@ -112,7 +112,7 @@ const isEdit = userPermisson(`${props.contentConfig.pageName}:update`)
             </el-table-column>
           </template>
           <template v-else-if="item.type === 'custom'">
-            <el-table-column v-bind="item" align="center" width="400px">
+            <el-table-column v-bind="item" align="center">
               <template #default="scope">
                 <slot
                   :name="item.slotName"

@@ -15,10 +15,13 @@ const searchConfig = {
     },
     {
       type: 'select',
-      props: 'status',
+      prop: 'status',
       label: '商品状态',
       placeholder: '请选择查询的商品状态',
-      options: []
+      options: [
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
     },
     {
       type: 'date-picker',
