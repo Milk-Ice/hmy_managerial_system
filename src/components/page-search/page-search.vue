@@ -2,13 +2,8 @@
 import type { ElForm } from 'element-plus'
 import { reactive, ref } from 'vue'
 import userPermisson from '@/hooks/usePermission'
+import type { IProps } from './type'
 
-interface IProps {
-  searchConfig: {
-    pageName: string
-    formItems: any[]
-  }
-}
 const props = defineProps<IProps>()
 
 const initialForm: any = {}

@@ -1,10 +1,13 @@
 <template>
   <div class="goods">
-    <h2>goods</h2>
+    <page-search :search-config="searchConfig" />
   </div>
 </template>
 
-<script setup lang="ts" name="goods"></script>
+<script setup lang="ts" name="goods">
+import pageSearch from '@/components/page-search/page-search.vue'
+import searchConfig from './config/search.config'
+</script>
 
 <style scoped>
 .goods {
