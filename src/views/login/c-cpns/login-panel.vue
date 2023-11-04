@@ -6,6 +6,7 @@ import { localCache } from '@/utils/cache'
 import { watch } from 'vue'
 
 const isRemPwd = ref<boolean>(localCache.getCache('isRemPwd') ?? false)
+
 const activeName = ref('account')
 const accountRef = ref<InstanceType<typeof panelAccount>>()
 
@@ -56,8 +57,12 @@ function handleLoginBtnClick() {
     </div>
     <!-- 记住密码 -->
     <div class="controls">
-      <el-checkbox v-model="isRemPwd" label="记住密码" />
-      <el-link type="primary">忘记密码</el-link>
+      <el-checkbox
+        v-if="activeName === 'account'"
+        v-model="isRemPwd"
+        label="记住密码"
+      />
+      <el-link type="primary" v-if="activeName === 'account'">忘记密码</el-link>
     </div>
     <!-- 立即登录 -->
     <el-button class="login-btn" type="primary" @click="handleLoginBtnClick"
