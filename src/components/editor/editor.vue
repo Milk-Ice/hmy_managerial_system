@@ -1,7 +1,12 @@
 <template>
   <div class="title">
-    <el-input v-model="title" placeholder="请输入标题" style="width: 500px">
-      <template #prepend>标题</template>
+    <el-input
+      v-model="title"
+      placeholder="请输入标题"
+      size="large"
+      style="width: 500px"
+    >
+      <template #prepend><h4>标题</h4></template>
     </el-input>
   </div>
   <div class="editor">

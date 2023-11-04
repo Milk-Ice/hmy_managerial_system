@@ -1,12 +1,10 @@
 <template>
-  <div class="list">
-    <h2>list</h2>
-  </div>
+  <page-content :content-config="contentConfig" ref="contentRef">
+  </page-content>
 </template>
 
-<script setup lang="ts" name="list"></script>
+<script setup lang="ts" name="list">
+import contentConfig from './config/content.config'
+</script>
 
-<style scoped>
-.list {
-}
-</style>
+<style scoped></style>
