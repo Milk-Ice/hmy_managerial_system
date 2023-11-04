@@ -35,7 +35,7 @@ const formRef = ref<InstanceType<typeof ElForm>>()
 
 <template>
   <div class="user-search" v-if="isQuery">
-    <el-form :model="searchForm" ref="formRef" label-width="80px">
+    <el-form :model="searchForm" ref="formRef" label-width="80px" size="large">
       <el-row :gutter="20">
         <template v-for="item in searchConfig.formItems" :key="item.props">
           <el-col :span="8">

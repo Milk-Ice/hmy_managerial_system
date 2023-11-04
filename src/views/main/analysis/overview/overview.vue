@@ -1,32 +1,53 @@
 <template>
-  <el-card class="box-card">
-    <template #header>
-      <div class="card-header">
-        <span>核心技术</span>
-        <el-button class="button" text
-          >只有了解真相才能获取真正的自由~</el-button
-        >
-      </div>
-    </template>
-    <div class="content">
-      <div class="header">
-        本项目是基于Vue3 + TS + Vite + Pinia + Echarts,实现的一个后台管理系统
-      </div>
-      <div class="intro">
-        大致的功能点有：权限控制，登录不同账号系统会显示不同的菜单栏、常见的增删改查、Element-plus的使用、Echarts5.x的基本使用、富文本编辑器的使用等
-      </div>
-
-      <div class="footer">在该项目中将主要采用组件化、模块化的思想</div>
+  <div class="txt">
+    <my-card />
+    <div class="button">
+      <el-button type="primary" @click="viewTxtFile"
+        >查看项目目录结构</el-button
+      >
     </div>
-  </el-card>
+  </div>
+  <div class="table">
+    <my-table />
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import myTable from './c-cpns/my-table.vue'
+import myCard from './c-cpns/my-card.vue'
+const viewTxtFile = () => {
+  // 你的 TXT 文档路径，假设在 src 目录下
+  const txtFilePath = 'TRELL.txt'
+
+  // 使用 Fetch API 加载文本文件
+  fetch(txtFilePath)
+    .then((response) => response.text())
+    .then((txtContent) => {
+      displayTxtContent(txtContent)
+    })
+    .catch((error) => {
+      console.error('无法加载文本文件', error)
+    })
+}
+
+const displayTxtContent = (content) => {
+  // 创建一个新窗口或弹出框来显示文本内容
+  const txtViewer = window.open('', '_blank')
+  txtViewer?.document.open()
+  txtViewer?.document.write('<pre>' + content + '</pre>')
+  txtViewer?.document.close()
+}
+</script>
 
 <style lang="less" scoped>
-.card-header {
+.button {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: end;
+}
+.el-table .warning-row {
+  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+}
+.el-table .success-row {
+  --el-table-tr-bg-color: var(--el-color-success-light-9);
 }
 </style>

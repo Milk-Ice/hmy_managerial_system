@@ -1,0 +1,210 @@
+src
+├─ assets
+│  ├─ 404_images
+│  │  ├─ 404.png
+│  │  └─ 404_cloud.png
+│  ├─ css
+│  │  ├─ common.less
+│  │  ├─ index.css
+│  │  ├─ index.less
+│  │  ├─ reset.css
+│  │  ├─ reset.less
+│  │  ├─ rest.css
+│  │  ├─ variables.css
+│  │  └─ variables.less
+│  └─ img
+│     ├─ bgc.svg
+│     └─ logo.png
+├─ base-ui
+├─ components
+│  ├─ editor
+│  │  └─ editor.vue
+│  ├─ icons
+│  ├─ main-header
+│  │  ├─ c-cpns
+│  │  │  ├─ header-info
+│  │  │  │  └─ header-info.vue
+│  │  │  └─ header-crumb.vue
+│  │  └─ main-header.vue
+│  ├─ mian-menu
+│  │  └─ mian-menu.vue
+│  ├─ page-content
+│  │  ├─ page-content.vue
+│  │  └─ type.ts
+│  ├─ page-echarts
+│  │  ├─ data
+│  │  │  └─ china.json
+│  │  ├─ src
+│  │  │  ├─ bar-echart.vue
+│  │  │  ├─ base-echart.vue
+│  │  │  ├─ line-echart.vue
+│  │  │  ├─ map-echart.vue
+│  │  │  ├─ pie-echart.vue
+│  │  │  └─ rose-echart.vue
+│  │  ├─ types
+│  │  │  └─ index.ts
+│  │  ├─ utils
+│  │  │  ├─ convert-data.ts
+│  │  │  └─ coordinate-data.ts
+│  │  └─ index.ts
+│  ├─ page-modal
+│  │  ├─ page-modal.vue
+│  │  └─ type.ts
+│  └─ page-search
+│     ├─ page-search.vue
+│     └─ type.ts
+├─ gobal
+│  ├─ constants.ts
+│  └─ register-cions.ts
+├─ hooks
+│  ├─ usePageContent.ts
+│  ├─ usePageModal.ts
+│  └─ usePermission.ts
+├─ router
+│  ├─ main
+│  │  ├─ analysis
+│  │  │  ├─ dashboard
+│  │  │  │  └─ dashboard.ts
+│  │  │  └─ overview
+│  │  │     └─ overview.ts
+│  │  ├─ product
+│  │  │  ├─ category
+│  │  │  │  └─ category.ts
+│  │  │  └─ goods
+│  │  │     └─ goods.ts
+│  │  ├─ story
+│  │  │  ├─ chat
+│  │  │  │  └─ chat.ts
+│  │  │  └─ list
+│  │  │     └─ list.ts
+│  │  └─ system
+│  │     ├─ department
+│  │     │  └─ department.ts
+│  │     ├─ menu
+│  │     │  └─ menu.ts
+│  │     ├─ role
+│  │     │  └─ role.ts
+│  │     └─ user
+│  │        └─ user.ts
+│  └─ index.ts
+├─ service
+│  ├─ config
+│  │  └─ index.ts
+│  ├─ login
+│  │  └─ login.ts
+│  ├─ mian
+│  │  ├─ analysis
+│  │  │  └─ analysis.ts
+│  │  ├─ product
+│  │  │  ├─ category
+│  │  │  │  └─ cactegory.ts
+│  │  │  └─ goods
+│  │  │     └─ goods.ts
+│  │  ├─ story
+│  │  │  └─ story.ts
+│  │  ├─ system
+│  │  │  └─ system.ts
+│  │  └─ mian.ts
+│  ├─ request
+│  │  ├─ index.ts
+│  │  └─ type.ts
+│  └─ index.ts
+├─ store
+│  ├─ login
+│  │  └─ login.ts
+│  ├─ main
+│  │  ├─ analysis
+│  │  │  └─ analysis.ts
+│  │  ├─ product
+│  │  │  ├─ category
+│  │  │  │  └─ category.ts
+│  │  │  ├─ goods
+│  │  │  └─ good.ts
+│  │  ├─ story
+│  │  │  └─ story.ts
+│  │  ├─ system
+│  │  │  └─ system.ts
+│  │  └─ main.ts
+│  └─ index.ts
+├─ types
+│  ├─ main
+│  │  └─ system
+│  │     └─ system.ts
+│  └─ login.d.ts
+├─ utils
+│  ├─ cache.ts
+│  ├─ format.ts
+│  └─ map_menus.ts
+├─ views
+│  ├─ login
+│  │  ├─ c-cpns
+│  │  │  ├─ login-panel.vue
+│  │  │  ├─ panel-account.vue
+│  │  │  └─ panel-phone.vue
+│  │  └─ Login.vue
+│  ├─ main
+│  │  ├─ analysis
+│  │  │  ├─ dashboard
+│  │  │  │  ├─ c-cpns
+│  │  │  │  │  ├─ chart-card.vue
+│  │  │  │  │  └─ count-card.vue
+│  │  │  │  └─ dashboard.vue
+│  │  │  └─ overview
+│  │  │     └─ overview.vue
+│  │  ├─ product
+│  │  │  ├─ category
+│  │  │  │  ├─ c-cpns
+│  │  │  │  ├─ config
+│  │  │  │  │  ├─ content.config.ts
+│  │  │  │  │  ├─ modal.config.ts
+│  │  │  │  │  └─ search.config.ts
+│  │  │  │  └─ category.vue
+│  │  │  └─ goods
+│  │  │     ├─ c-cpns
+│  │  │     ├─ config
+│  │  │     │  ├─ contentConfig.ts
+│  │  │     │  ├─ modalConfig.ts
+│  │  │     │  └─ search.config.ts
+│  │  │     └─ goods.vue
+│  │  ├─ story
+│  │  │  ├─ chat
+│  │  │  │  └─ chat.vue
+│  │  │  └─ list
+│  │  │     ├─ c-cpns
+│  │  │     │  └─ card.vue
+│  │  │     ├─ config
+│  │  │     │  └─ content.config.ts
+│  │  │     └─ list.vue
+│  │  ├─ system
+│  │  │  ├─ department
+│  │  │  │  ├─ c-cpns
+│  │  │  │  │  ├─ department-content.vue
+│  │  │  │  │  ├─ department-modal.vue
+│  │  │  │  │  └─ department-search.vue
+│  │  │  │  ├─ config
+│  │  │  │  │  ├─ content.config.ts
+│  │  │  │  │  ├─ modal.config.ts
+│  │  │  │  │  └─ search.config.ts
+│  │  │  │  ├─ department.vue
+│  │  │  │  └─ department_v1.vue
+│  │  │  ├─ menu
+│  │  │  │  ├─ config
+│  │  │  │  │  └─ content.config.ts
+│  │  │  │  └─ menu.vue
+│  │  │  ├─ role
+│  │  │  │  ├─ config
+│  │  │  │  │  ├─ content.config.ts
+│  │  │  │  │  ├─ modal.config.ts
+│  │  │  │  │  └─ search.config.ts
+│  │  │  │  └─ role.vue
+│  │  │  └─ user
+│  │  │     ├─ c-cpns
+│  │  │     │  ├─ user-content.vue
+│  │  │     │  ├─ user-modal.vue
+│  │  │     │  └─ user-search.vue
+│  │  │     └─ user.vue
+│  │  └─ Main.vue
+│  └─ NotFound
+│     └─ NotFound.vue
+├─ App.vue
+└─ main.ts
