@@ -2,10 +2,6 @@
 import { ref, reactive } from 'vue'
 import useSystemStore from '@/store/main/system/system'
 import type { IModalProps } from './type'
-import { ElMessage } from 'element-plus'
-import { Plus } from '@element-plus/icons-vue'
-
-import type { UploadProps } from 'element-plus'
 
 // 0.接收父组件传来的数据
 const props = defineProps<IModalProps>()
@@ -74,31 +70,6 @@ function handleConfirmClick() {
 
 // 暴露的属性和方法
 defineExpose({ setModalVisible })
-
-// 4.照片上传的逻辑
-
-const imageUrl = ref('')
-
-const handleAvatarSuccess: UploadProps['onSuccess'] = (
-  response,
-  uploadFile
-) => {
-  imageUrl.value = URL.createObjectURL(uploadFile.raw!)
-}
-
-const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
-  if (rawFile.type !== 'image/jpeg') {
-    ElMessage.error('照片必须是jpg格式')
-    return false
-  } else if (rawFile.size / 1024 / 1024 > 2) {
-    ElMessage.error('照片大小必须在2MB以内')
-    return false
-  }
-  return true
-}
-const handlePreview: UploadProps['onPreview'] = (file) => {
-  console.log(file)
-}
 </script>
 
 <template>
@@ -134,20 +105,6 @@ const handlePreview: UploadProps['onPreview'] = (file) => {
                   ></el-option>
                 </template>
               </el-select>
-            </template>
-            <template v-if="item.type === 'img'">
-              <el-upload
-                v-model="formData[item.prop]"
-                :on-preview="handlePreview"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload"
-                class="avatar-uploader"
-                action="http://codercba.com:5000"
-              >
-                <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-                <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
-              </el-upload>
             </template>
             <template v-if="item.type === 'custom'">
               <!-- 动态插槽，根据 item.slotName 的值插入不同的自定义内容 -->

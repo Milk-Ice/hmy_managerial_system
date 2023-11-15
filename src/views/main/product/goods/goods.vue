@@ -12,7 +12,6 @@
       @edit-click="HandleEditClick"
       @new-click="HandleNewClick"
     >
-      <page-modal :modal-config="modalConfig" />
       <template #img="scope">
         <img :src="scope.row[scope.prop]" style="width: 150px; height: 200px"
       /></template>
@@ -22,12 +21,15 @@
         </el-button>
       </template>
     </page-content>
-    <page-modal ref="modalRef" :modal-config="modalConfig" />
+    <page-modal ref="modalRef" :modal-config="modalConfig"> </page-modal>
   </div>
 </template>
 
 <script setup lang="ts" name="goods">
-import pageSearch from '@/components/page-search/page-search.vue'
+import PageSearch from '@/components/page-search/page-search.vue'
+import PageContent from '@/components/page-content/page-content.vue'
+import PageModal from '@/components/page-modal/page-modal.vue'
+
 import searchConfig from './config/search.config'
 import modalConfig from './config/modalConfig'
 import contentConfig from './config/contentConfig'
@@ -43,5 +45,32 @@ const { modalRef, HandleNewClick, HandleEditClick } = usePageModal()
 .goods {
   border-radius: 8px;
   overflow: hidden;
+}
+
+.avatar-uploader .avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  text-align: center;
 }
 </style>

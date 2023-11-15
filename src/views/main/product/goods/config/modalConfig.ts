@@ -23,9 +23,10 @@ const modalConfig: IModalConfig = {
     },
     // { type: 'select', label: '状态', prop: 'status', options: [] },
     {
-      type: 'img',
-      label: '图片',
+      type: 'custom',
       prop: 'imgUrl',
+      label: '图片',
+      slotName: 'img',
       width: '200px'
     }, // 自定义
     { type: 'input', label: '库存', prop: 'inventoryCount' },
